@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-
 //npm install firebase angularfire2 --save
 import { AngularFireModule } from 'angularfire2';
-
+import { HardwareModule } from './hardware/hardware.module';
 export const firebaseConfig = {
   apiKey: 'AIzaSyCAPID67_YN3YudiWtWeDArpzgPg9OklVc',
   authDomain: 'eindopdrachtfep.firebaseapp.com',
@@ -16,10 +15,10 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule,AngularFireModule.initializeApp(firebaseConfig)
+    BrowserModule,AngularFireModule.initializeApp(firebaseConfig),HardwareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
