@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HardwareOverzichtComponent implements OnInit {
 
-  constructor() { }
+  hardwareService:any;
+  constructor(public hardwareservice:HardwareService) {
+    this.hardwareService = hardwareservice;
+  }
 
   ngOnInit() {
   }

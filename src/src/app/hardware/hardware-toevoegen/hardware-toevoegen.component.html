@@ -1,3 +1,12 @@
-<p>
-  hardware-toevoegen works!
-</p>
+<input type="file" (change)="hardwareService.onFileChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
+<img [src]="hardwareService.logo" alt="Voorbeeld afbeelding" height="100px" width="100px">
+<br>
+Naam<input #naam/><br>
+<br>
+Beschrijving<input  #beschrijving/><br>
+<br>
+
+<button type="button" (click)="hardwareService.voegHardwareToe(naam.value, beschrijving.value,fileinput.files[0])">Voeg Hardware Toe</button>
+
+
+
