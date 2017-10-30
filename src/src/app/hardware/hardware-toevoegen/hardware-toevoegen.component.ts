@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HardwareService} from '../hardware-service.service'
+import {HardwareService} from '../hardware-service.service';
 
 @Component({
   selector: 'hardware-toevoegen',

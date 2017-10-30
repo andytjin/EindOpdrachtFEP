@@ -1,3 +1,15 @@
 <p>
-  hardware-overzicht works!
+  hardware overzicht
 </p>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>naam</th>
+    <th>beschrijving</th>
+  </tr>
+  <tr *ngFor="let hardware of hardwareList | async">
+    <td>{{ (hardware.data | async)?.naam }}</td>
+
+
+  </tr>
+</table>

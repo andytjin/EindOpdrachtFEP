@@ -1,4 +1,4 @@
-<input type="file" (change)="hardwareService.onFileChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
+<input type="file" (change)="hardwareService.previewPictureOnChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
 <img [src]="hardwareService.logo" alt="Voorbeeld afbeelding" height="100px" width="100px">
 <br>
 Naam<input #naam/><br>

@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 //npm install firebase angularfire2 --save
 import { AngularFireModule } from 'angularfire2';
 import { HardwareModule } from './hardware/hardware.module';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import {HardwareService} from "./hardware/hardware-service.service";
 import * as firebase from "firebase";
 

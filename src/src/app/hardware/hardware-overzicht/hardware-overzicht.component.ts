@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {HardwareService} from '../hardware-service.service';
 @Component({
   selector: 'app-hardware-overzicht',
   templateUrl: './hardware-overzicht.component.html',

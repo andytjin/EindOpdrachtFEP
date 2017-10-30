@@ -1,9 +1,24 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import {FirebaseApp} from "angularfire2";
+import {Observable} from "rxjs/Observable";
+
+
 @Injectable()
 export class HardwareService {
   logo:any;
-  constructor() { }
+  hardwareList:Observable<any[]>;
+
+  constructor(private af: FirebaseApp) {
+    /*this.hardwareList = af.list('Hardware')
+      .map((itemKeys) => {
+        return itemKeys.map(key => {
+          key.data = af.list('Hardware/${key.$key}');
+          return key;
+        })
+      });*/
+  }
+
 
   uploadPicture(afbeelding: File, hardwareId:any){
     let ref = firebase.storage().ref();
@@ -39,7 +54,8 @@ export class HardwareService {
     return firebase.database().ref().update(updates);
   }
 
-  onFileChange(fileInput: any){
+
+  previewPictureOnChange(fileInput: any){
     this.logo = fileInput.target.files[0];
 
     let reader = new FileReader();
