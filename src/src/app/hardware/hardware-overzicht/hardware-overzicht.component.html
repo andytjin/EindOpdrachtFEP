@@ -7,9 +7,15 @@
     <th>naam</th>
     <th>beschrijving</th>
   </tr>
-  <tr *ngFor="let hardware of hardwareList | async">
-    <td>{{ (hardware.data | async)?.naam }}</td>
-
+  <tbody *ngFor="let hardwarekey of hardwareService.hardwareKeyList | async">
+  <tr *ngFor="let hardware of hardwareService.hardwareList | async">
+    <td>
+        <code>{{hardwarekey.payload.key}}</code>
+    </td>
+    <td>{{hardware.naam}}</td>
+    <td>{{hardware.beschrijving}}</td>
 
   </tr>
+  </tbody>
 </table>
+

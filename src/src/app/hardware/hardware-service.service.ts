@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import {FirebaseApp} from "angularfire2";
+import {AngularFireDatabase } from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
+
 
 
 @Injectable()
 export class HardwareService {
   logo:any;
+  hardwareKeyList:Observable<any[]>;
   hardwareList:Observable<any[]>;
 
-  constructor(private af: FirebaseApp) {
-    /*this.hardwareList = af.list('Hardware')
-      .map((itemKeys) => {
-        return itemKeys.map(key => {
-          key.data = af.list('Hardware/${key.$key}');
-          return key;
-        })
-      });*/
+  constructor(public af: AngularFireDatabase) {
+    this.hardwareKeyList = af.list('/Hardware').snapshotChanges();
+    this.hardwareList = af.list('/Hardware').valueChanges();
   }
 
 
