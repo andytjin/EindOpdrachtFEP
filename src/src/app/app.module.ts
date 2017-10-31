@@ -16,7 +16,11 @@ export const firebaseConfig = {
   storageBucket: "eindopdrachtfep.appspot.com",
   messagingSenderId: "697311754605"
 };
-firebase.initializeApp(firebaseConfig);
+//de route paden van alle pages
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +29,8 @@ firebase.initializeApp(firebaseConfig);
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     HardwareModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+
   ],
   providers: [HardwareService],
   bootstrap: [AppComponent]

@@ -3,17 +3,13 @@ import * as firebase from 'firebase/app';
 import {AngularFireDatabase } from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 
-
-
 @Injectable()
 export class HardwareService {
   logo:any;
-  hardwareKeyList:Observable<any[]>;
   hardwareList:Observable<any[]>;
 
   constructor(public af: AngularFireDatabase) {
-    this.hardwareKeyList = af.list('/Hardware').snapshotChanges();
-    this.hardwareList = af.list('/Hardware').valueChanges();
+    this.hardwareList = af.list('/Hardware').snapshotChanges();
   }
 
 
@@ -21,6 +17,12 @@ export class HardwareService {
     let ref = firebase.storage().ref();
     let picture = ref.child('/Hardware/' +hardwareId +'/' + afbeelding.name);
     picture.put(afbeelding);
+  }
+
+  updatePicture(afbeelding: File, hardwareId:any){
+    let ref = firebase.storage().ref();
+    let picture = ref.child('/Hardware/' +hardwareId +'/' + afbeelding.name);
+    picture.updateMetadata(afbeelding);
   }
 
 
@@ -51,17 +53,30 @@ export class HardwareService {
     return firebase.database().ref().update(updates);
   }
 
+  wijzigHardware(key: any,naam: string, beschrijving: string, afbeelding: File){
+    var hardware = this.af.object(key);
+    hardware.update({
+      naam: naam,
+      beschrijving: beschrijving
+    });
+    this.updatePicture(afbeelding,key);
+
+  }
 
   previewPictureOnChange(fileInput: any){
     this.logo = fileInput.target.files[0];
-
     let reader = new FileReader();
 
     reader.onload = (e: any) => {
       this.logo = e.target.result;
     }
-
     reader.readAsDataURL(fileInput.target.files[0]);
+  }
+
+  getHardware(key:any){
+    var hardware: Observable<any>;
+    hardware = this.af.object(key).valueChanges();
+    return hardware;
   }
 
 }

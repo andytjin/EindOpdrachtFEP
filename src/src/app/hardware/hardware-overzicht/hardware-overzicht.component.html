@@ -1,21 +1,20 @@
 <p>
   hardware overzicht
 </p>
+<a [routerLink]="[{ outlets: { popup: ['hardwareToevoegen'] } }]">Create</a>
+
 <table>
   <tr>
     <th>Id</th>
     <th>naam</th>
     <th>beschrijving</th>
   </tr>
-  <tbody *ngFor="let hardwarekey of hardwareService.hardwareKeyList | async">
   <tr *ngFor="let hardware of hardwareService.hardwareList | async">
-    <td>
-        <code>{{hardwarekey.payload.key}}</code>
+    <td >
+        <a [routerLink]="[{ outlets: { popup: ['hardwareWijzigen/'+hardware.payload.key] } }]">{{hardware.payload.key}}</a>
     </td>
-    <td>{{hardware.naam}}</td>
-    <td>{{hardware.beschrijving}}</td>
-
+    <td>{{hardware.payload.val().naam}}</td>
+    <td>{{hardware.payload.val().beschrijving}}</td>
   </tr>
-  </tbody>
 </table>
-
+<router-outlet name="popup"></router-outlet>

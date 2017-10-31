@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-hardware-overzicht',
   templateUrl: './hardware-overzicht.component.html',
@@ -8,11 +9,14 @@ import {HardwareService} from '../hardware-service.service';
 export class HardwareOverzichtComponent implements OnInit {
 
   hardwareService:any;
-  constructor(public hardwareservice:HardwareService) {
+  constructor(private route: Router,public hardwareservice:HardwareService) {
     this.hardwareService = hardwareservice;
   }
 
+
+
   ngOnInit() {
+
   }
 
 }
