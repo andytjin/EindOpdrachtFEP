@@ -39,6 +39,11 @@ export class HardwareToevoegenComponent implements OnInit {
     this.router.navigate([{ outlets: { popup: null }}]);
   }
 
+  saveHardware(naam: string, beschrijving: string, afbeelding: File) {
+    this.hardwareService.voegHardwareToe(naam, beschrijving, afbeelding);
+    this.closePopup();
+  }
+
   ngOnInit() {
   }
 
