@@ -16,6 +16,7 @@ export const firebaseConfig = {
   storageBucket: "eindopdrachtfep.appspot.com",
   messagingSenderId: "697311754605"
 };
+firebase.initializeApp(firebaseConfig);
 //de route paden van alle pages
 
 

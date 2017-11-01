@@ -11,7 +11,7 @@
   </tr>
   <tr *ngFor="let hardware of hardwareService.hardwareList | async">
     <td >
-        <a [routerLink]="[{ outlets: { popup: ['hardwareWijzigen/'+hardware.payload.key] } }]">{{hardware.payload.key}}</a>
+        <a [routerLink]="[{ outlets: { popup: ['hardwareWijzigen', hardware.payload.key] } }]">{{hardware.payload.key}}</a>
     </td>
     <td>{{hardware.payload.val().naam}}</td>
     <td>{{hardware.payload.val().beschrijving}}</td>
