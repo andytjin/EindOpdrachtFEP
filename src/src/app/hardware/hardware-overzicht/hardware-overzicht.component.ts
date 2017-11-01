@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
 @Component({
@@ -8,15 +8,18 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HardwareOverzichtComponent implements OnInit {
 
-  hardwareService:any;
-  constructor(private route: Router,public hardwareservice:HardwareService) {
+  hardwareService: any;
+
+  constructor(private route: Router, public hardwareservice: HardwareService) {
     this.hardwareService = hardwareservice;
   }
 
-
-
   ngOnInit() {
-
   }
 
+  deleteHardware(id: any) {
+    this.hardwareService.deleteHardware(id);
+    this.hardwareService.deletePicture(id);
+    return alert("Hardware succesfully deleted");
+  }
 }

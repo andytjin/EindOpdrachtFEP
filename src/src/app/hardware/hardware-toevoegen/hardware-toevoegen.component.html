@@ -6,8 +6,7 @@
     <br>
     Beschrijving<input  #beschrijving/><br>
     <br>
-    <p *ngIf="!sending">
-    <button type="button" (click)="saveHardware(naam.value, beschrijving.value,fileinput.files[0])">Voeg Hardware Toe</button>
-    <button type="button" (click)="cancel()">Cancel</button>
+    <p *ngIf="!sending"><button type="button" (click)="cancel()">Cancel</button>
+    <button type="button" (click)="saveHardware(naam.value, beschrijving.value,fileinput.files[0])">Toevoegen</button>
     </p>
 </div>
