@@ -7,7 +7,6 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./hardware-overzicht.component.css']
 })
 export class HardwareOverzichtComponent implements OnInit {
-
   hardwareService: any;
 
   constructor(private route: Router, public hardwareservice: HardwareService) {

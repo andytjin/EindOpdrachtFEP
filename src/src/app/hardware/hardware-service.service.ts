@@ -79,6 +79,11 @@ export class HardwareService {
     return hardware;
   }
 
+  deleteHardware(key: any) {
+    const hardware = this.af.object('Hardware/' + key);
+    hardware.remove();
+  }
+
   getPicture(key: any) {
     var image: any;
     var url:any;
