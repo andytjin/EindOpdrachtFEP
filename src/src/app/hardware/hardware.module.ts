@@ -4,11 +4,33 @@ import { HardwareOverzichtComponent } from './hardware-overzicht/hardware-overzi
 import { HardwareToevoegenComponent } from './hardware-toevoegen/hardware-toevoegen.component';
 import { HardwareVerwijderenComponent } from './hardware-verwijderen/hardware-verwijderen.component';
 import { HardwareWijzigenComponent } from './hardware-wijzigen/hardware-wijzigen.component';
+import {HardwareService} from './hardware-service.service'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'hardwareOverzicht', component:HardwareOverzichtComponent  },
+  { path: 'hardwareToevoegen', component:HardwareToevoegenComponent, outlet:'popup'},
+  { path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet:'popup' },
+  { path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet:'popup'}
+  ,
+  { path: '',
+    redirectTo: '/hardwareOverzicht',
+    pathMatch: 'full'
+  }
+];
 @NgModule({
+
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
-  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent]
+  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  exports:[HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  providers:[HardwareService]
 })
 export class HardwareModule { }

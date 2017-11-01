@@ -1,3 +1,12 @@
-<p>
-  hardware-toevoegen works!
-</p>
+ <div class="popup">
+    <input type="file" (change)="hardwareService.previewPictureOnChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
+    <img [src]="hardwareService.logo" alt="Voorbeeld afbeelding" height="100px" width="100px">
+    <br>
+    Naam<input #naam/><br>
+    <br>
+    Beschrijving<input  #beschrijving/><br>
+    <br>
+    <p *ngIf="!sending"><button type="button" (click)="cancel()">Cancel</button>
+    <button type="button" (click)="saveHardware(naam.value, beschrijving.value,fileinput.files[0])">Toevoegen</button>
+    </p>
+</div>
