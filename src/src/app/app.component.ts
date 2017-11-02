@@ -13,4 +13,14 @@ export class AppComponent {
   logout(){
     this.as.logout();
   }
+  getSessionUser() {
+    return this.as.getSessionUser();
+  }
+
+  getSessionUserType() {
+    console.log(this.as.getSessionUserType());
+    return this.as.getSessionUserType();
+  }
+
+
 }

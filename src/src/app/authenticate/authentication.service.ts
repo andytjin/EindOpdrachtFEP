@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import {AuthenticationComponent} from '../authenticate/authentication/authentication.component';
+import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database";
 import * as CryptoJS from 'crypto-js';
 
@@ -11,6 +10,7 @@ var iv = CryptoJS.enc.Utf8.parse('7061737323313233');
 export class AuthenticationService {
   constructor(public af: AngularFireDatabase) {
   }
+
   authenticate(username: string, password: string) {
     const useraccount = this.af.object('UserAccount/' + username.toLowerCase());
 
@@ -34,10 +34,12 @@ export class AuthenticationService {
     });
 
   }
-  logout(){
+
+  logout() {
     localStorage.removeItem('LoggedInUser');
     window.location.reload();
   }
+
   decrypt(toDecrypt: string) {
     var decrypted = CryptoJS.AES.decrypt(toDecrypt, key, {
       keySize: 128 / 8,
@@ -49,10 +51,15 @@ export class AuthenticationService {
   }
 
   splitLoggedInUser() {
-    var storage = this.decrypt(localStorage.getItem('LoggedInUser')).toString(CryptoJS.enc.Utf8);
-    var splitted = storage.toString().split('|+?]+|');
+    var splitted = ['none', 'none']
+    if (localStorage.getItem('LoggedInUser') == null) {
+    } else {
+      var storage = this.decrypt(localStorage.getItem('LoggedInUser')).toString(CryptoJS.enc.Utf8);
+      splitted = storage.toString().split('|+?]+|');
+    }
     return splitted;
   }
+
   getSessionUser() {
     return this.splitLoggedInUser()[0].toString();
   }
