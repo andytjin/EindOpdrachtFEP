@@ -4,9 +4,11 @@ import { AppComponent } from './app.component';
 //npm install firebase angularfire2 --save
 import { AngularFireModule } from 'angularfire2';
 import { HardwareModule } from './hardware/hardware.module';
+import { ExemplaarModule} from './exemplaar/exemplaar.module'
 import {HardwareService} from "./hardware/hardware-service.service";
 import * as firebase from "firebase";
 import { AngularFireDatabaseModule} from "angularfire2/database";
+import { ExemplaarService } from "./exemplaar/exemplaar-service.service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCAPID67_YN3YudiWtWeDArpzgPg9OklVc",
@@ -20,8 +22,6 @@ firebase.initializeApp(firebaseConfig);
 //de route paden van alle pages
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent
@@ -30,10 +30,10 @@ firebase.initializeApp(firebaseConfig);
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     HardwareModule,
+    ExemplaarModule,
     AngularFireDatabaseModule,
-
   ],
-  providers: [HardwareService],
+  providers: [HardwareService,ExemplaarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

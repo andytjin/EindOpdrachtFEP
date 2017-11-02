@@ -1,23 +1,26 @@
 import { Component, OnInit,  HostBinding } from '@angular/core';
-import {HardwareService} from '../hardware-service.service';
+import {ExemplaarService} from '../exemplaar-service.service';
 import { Router } from '@angular/router';
 import { slideInDownAnimation }   from '../../animations';
+
 @Component({
-  selector: 'hardware-toevoegen',
-  templateUrl: './hardware-toevoegen.component.html',
-  styleUrls: [ './hardware-toevoegen.component.css' ],
+  selector: 'app-exemplaar-toevoegen',
+  templateUrl: './exemplaar-toevoegen.component.html',
+  styleUrls: ['./exemplaar-toevoegen.component.css'],
   animations: [ slideInDownAnimation ]
 })
-export class HardwareToevoegenComponent implements OnInit {
+export class ExemplaarToevoegenComponent implements OnInit {
+
+
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.position')  position = 'absolute';
-  hardwareService:any;
+  exemplaarService:any;
   details: string;
   sending = false;
 
-  constructor(private router: Router,public hardwareservice:HardwareService) {
-    this.hardwareService = hardwareservice;
+  constructor(private router: Router,public exemplaarservice:ExemplaarService) {
+    this.exemplaarService = exemplaarservice;
   }
   send() {
     this.sending = true;
@@ -39,9 +42,13 @@ export class HardwareToevoegenComponent implements OnInit {
     this.router.navigate([{ outlets: { popup: null }}]);
   }
 
-  saveHardware(naam: string, beschrijving: string, afbeelding: File) {
-    this.hardwareService.voegHardwareToe(naam, beschrijving, afbeelding);
+  saveExemplaar(hardwareid:any,serienummer:string) {
+    this.exemplaarService.voegExemplaarToe(hardwareid,serienummer);
     this.closePopup();
+  }
+
+  getHardwareList(){
+    return this.exemplaarService.getHardwareList();
   }
 
   ngOnInit() {

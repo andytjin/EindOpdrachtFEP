@@ -2,7 +2,7 @@ import {Component, OnInit, HostBinding} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HardwareService} from '../hardware-service.service';
 import {Observable} from "rxjs/Observable";
-import {slideInDownAnimation}   from '../animations';
+import {slideInDownAnimation}   from '../../animations';
 import * as firebase from 'firebase/app';
 
 @Component({
