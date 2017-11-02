@@ -1,6 +1,7 @@
 <p>
   hardware overzicht
 </p>
+<div *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
 <a [routerLink]="[{ outlets: { popup: ['hardwareToevoegen'] } }]">Create</a>
 
 <table>
@@ -19,3 +20,4 @@
   </tr>
 </table>
 <router-outlet name="popup"></router-outlet>
+</div>

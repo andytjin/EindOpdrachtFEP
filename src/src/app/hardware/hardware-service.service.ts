@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {AngularFireDatabase} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
+import {AuthenticationService} from "../authenticate/authentication.service";
+
 
 @Injectable()
 export class HardwareService {
   logo: any;
   hardwareList: Observable<any[]>;
 
-  constructor(public af: AngularFireDatabase) {
+  constructor(public af: AngularFireDatabase, private as: AuthenticationService) {
     this.hardwareList = af.list('/Hardware').snapshotChanges();
   }
 
@@ -101,5 +103,15 @@ export class HardwareService {
     });
     return image;
   }
+
+  getSessionUser() {
+    return this.as.getSessionUser();
+  }
+
+  getSessionUserType() {
+    return this.as.getSessionUserType();
+  }
+
+
 }
 

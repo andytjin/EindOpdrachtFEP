@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
+
 //npm install firebase angularfire2 --save
 import { AngularFireModule } from 'angularfire2';
 import { HardwareModule } from './hardware/hardware.module';
 import {HardwareService} from "./hardware/hardware-service.service";
 import * as firebase from "firebase";
 import { AngularFireDatabaseModule} from "angularfire2/database";
+import { AuthenticationComponent } from './authenticate/authentication/authentication.component';
+import { AuthenticationService } from './authenticate/authentication.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCAPID67_YN3YudiWtWeDArpzgPg9OklVc",
@@ -24,7 +27,8 @@ firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ firebase.initializeApp(firebaseConfig);
     AngularFireDatabaseModule,
 
   ],
-  providers: [HardwareService],
+  providers: [HardwareService, AuthenticationService, AuthenticationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
