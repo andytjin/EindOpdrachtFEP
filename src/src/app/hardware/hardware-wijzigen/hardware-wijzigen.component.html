@@ -7,22 +7,14 @@
   <br>
   Beschrijving<input #beschrijving value="{{(hardwareToEdit | async)?.beschrijving}}"/><br>
   <br>
-  <button type="button" (click)="console.log('Nieuw Exemplaar')">Nieuw Exemplaar</button>
-  <button type="button" (click)="console.log('Wijzig Exemplaar')">Wijzig Exemplaar</button>
-  <table>
-    <th>SerieNummer</th>
-    <th>Status</th>
-    <th>Terug Breng Datum</th>
-    <th>Verwijder dit exemplaar</th>
-  </table>
+  <app-exemplaar-overzicht></app-exemplaar-overzicht>
   <p *ngIf="!sending">
     <button type="button" (click)="cancel()">Annuleren</button>
     <button type="button" (click)="saveHardware(id, naam.value, beschrijving.value,fileinput.files[0])">
       Opslaan
     </button>
-
-
   </p>
+
 </div>
 
 

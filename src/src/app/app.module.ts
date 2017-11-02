@@ -34,7 +34,6 @@ firebase.initializeApp(firebaseConfig);
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     HardwareModule,
-    ExemplaarModule,
     AngularFireDatabaseModule,
   ],
   providers: [HardwareService, AuthenticationService, AuthenticationComponent, ExemplaarService],

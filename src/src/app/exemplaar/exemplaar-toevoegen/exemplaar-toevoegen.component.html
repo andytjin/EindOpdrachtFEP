@@ -1,9 +1,9 @@
 <div class="popup">
   <br>
   <select #hardwareId>
-      <option *ngFor="let hardware of getHardwareList() | async"
-              [value]="hardware.payload.val().key">{{hardware.payload.val().naam}}
-      </option>
+    <option *ngFor="let hardware of getHardwareList() | async"
+            [value]="hardware.payload.val().key">{{hardware.payload.val().naam}}
+    </option>
   </select>
   Serienummer<input #serienummer/><br>
   <br>

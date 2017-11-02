@@ -7,6 +7,7 @@ import {HardwareWijzigenComponent} from './hardware-wijzigen/hardware-wijzigen.c
 import {HardwareService} from './hardware-service.service'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationService} from "../authenticate/authentication.service";
+import {ExemplaarModule} from "../exemplaar/exemplaar.module";
 
 import {RouterModule, Routes} from '@angular/router';
 
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    ExemplaarModule,
     RouterModule.forRoot(
       appRoutes
     )
