@@ -18,7 +18,6 @@ export class AppComponent {
   }
 
   getSessionUserType() {
-    console.log(this.as.getSessionUserType());
     return this.as.getSessionUserType();
   }
 

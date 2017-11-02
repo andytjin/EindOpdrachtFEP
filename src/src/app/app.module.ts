@@ -37,7 +37,7 @@ firebase.initializeApp(firebaseConfig);
     ExemplaarModule,
     AngularFireDatabaseModule,
   ],
-  providers: [HardwareService, AuthenticationService, AuthenticationComponent],
+  providers: [HardwareService, AuthenticationService, AuthenticationComponent, ExemplaarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
