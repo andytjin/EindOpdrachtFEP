@@ -1,21 +1,23 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HardwareOverzichtComponent } from './hardware-overzicht/hardware-overzicht.component';
-import { HardwareToevoegenComponent } from './hardware-toevoegen/hardware-toevoegen.component';
-import { HardwareVerwijderenComponent } from './hardware-verwijderen/hardware-verwijderen.component';
-import { HardwareWijzigenComponent } from './hardware-wijzigen/hardware-wijzigen.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HardwareOverzichtComponent} from './hardware-overzicht/hardware-overzicht.component';
+import {HardwareToevoegenComponent} from './hardware-toevoegen/hardware-toevoegen.component';
+import {HardwareVerwijderenComponent} from './hardware-verwijderen/hardware-verwijderen.component';
+import {HardwareWijzigenComponent} from './hardware-wijzigen/hardware-wijzigen.component';
 import {HardwareService} from './hardware-service.service'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthenticationService} from "../authenticate/authentication.service";
 
-import { RouterModule, Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: 'hardwareOverzicht', component:HardwareOverzichtComponent  },
-  { path: 'hardwareToevoegen', component:HardwareToevoegenComponent, outlet:'popup'},
-  { path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet:'popup' },
-  { path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet:'popup'}
+  {path: 'hardwareOverzicht', component: HardwareOverzichtComponent},
+  {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
+  {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
+  {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'}
   ,
-  { path: '',
+  {
+    path: '',
     redirectTo: '/hardwareOverzicht',
     pathMatch: 'full'
   }
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     )
   ],
   declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
-  exports:[HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
-  providers:[HardwareService]
+  exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  providers: [HardwareService,AuthenticationService]
 })
-export class HardwareModule { }
+export class HardwareModule {
+}
