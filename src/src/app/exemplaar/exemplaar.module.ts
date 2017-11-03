@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
-  { path: 'exemplaarToevoegen', component:ExemplaarToevoegenComponent, outlet:'popup'},
+  { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
   { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
   ,
