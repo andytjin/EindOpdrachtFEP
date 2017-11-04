@@ -8,9 +8,10 @@ import {ExemplaarService} from "../exemplaar-service.service";
   styleUrls: ['./exemplaar-overzicht.component.css']
 })
 export class ExemplaarOverzichtComponent implements OnInit {
-  id: string;
+  hardwareId: string;
   private sub: any;
   exemplaarService: any;
+  exemplaarList:any;
 
   constructor(private router: Router, public exemplaarservice: ExemplaarService, private route: ActivatedRoute) {
     this.exemplaarService = exemplaarservice;
@@ -18,8 +19,9 @@ export class ExemplaarOverzichtComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.hardwareId = params['id'];
       })
+    this.exemplaarList = this.exemplaarservice.getExemplarenById(this.hardwareId);
   }
 
   deleteHardware(id: any) {

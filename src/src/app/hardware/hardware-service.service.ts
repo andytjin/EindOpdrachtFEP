@@ -1,3 +1,4 @@
+///<reference path="../../../node_modules/firebase/app/index.d.ts"/>
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {AngularFireDatabase} from "angularfire2/database";
@@ -21,12 +22,11 @@ export class HardwareService {
     picture.put(afbeelding);
   }
 
-  updatePicture(afbeelding: File, hardwareId: any) {
+  updatePicture(afbeelding: any, hardwareId: any) {
     let ref = firebase.storage().ref();
     let picture = ref.child('/Hardware/' + hardwareId + '/' + hardwareId);
     picture.updateMetadata(afbeelding);
   }
-
 
   deletePicture(hardwareId: string) {
     let ref = firebase.storage().ref();
@@ -96,9 +96,6 @@ export class HardwareService {
 
 
       //push out the listings array of data//
-      // this.listingss.push(listings);
-      console.log(url);
-      console.log("this was a success");
       return url;
     });
     return image;

@@ -2,23 +2,20 @@
 <p>
   Exemplaar overzicht
 </p>
-<a [routerLink]="['',{outlets: {popup: 'exemplaarToevoegen'}}]">Nieuw Exemplaar </a>
+<a [routerLink]="['',{ outlets: { popup: ['exemplaarToevoegen', hardwareId] } }]" >Nieuw Exemplaar</a>
 <button type="button" (click)="console.log('Wijzig Exemplaar')">Wijzig Exemplaar</button>
-<p>sweekek {{id}}</p>
-
 <table>
   <tr>
   <th>SerieNummer</th>
   <th>Status</th>
   <th>Terug Breng Datum</th>
   <th>Verwijder dit exemplaar</th></tr>
-  <tr *ngFor="let exemplaar of exemplaarService.exemplaarList | async">
-    <td>{{exemplaar.payload.val().serienummer}}</td>
-    <td>{{exemplaar.payload.val().status}}</td>
+  <tr *ngFor="let exemplaar of exemplaarList | async">
+    <td>{{exemplaar.serienummer}}</td>
+    <td>{{exemplaar.status}}</td>
     <td >
       <a [routerLink]="[{ outlets: { popup: ['exemplaarWijzigen', exemplaar.payload.key] } }]">Exemplaar Detail</a>
     </td>
     <td><input type="button" (click)="deleteHardware(exemplaar.payload.key)" src="https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiTlajdwZ3XAhVM6qQKHaDGAv0QjRwIBw&url=http%3A%2F%2Fwww.pvhc.net%2FSmall-Delete-Icon20tsezejah%2F&psig=AOvVaw30sfsJl47WItCh2G0W4gPA&ust=1509630410688876" alt="Delete" width="48" height="48" value="Verwijder"></td>
   </tr>
 </table>
-
