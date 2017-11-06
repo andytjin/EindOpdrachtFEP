@@ -6,13 +6,11 @@ import {AuthenticationService} from "../authenticate/authentication.service";
 import {RouterModule, Routes} from '@angular/router';
 import {ReserveringOverzichtComponent} from "./reservering-overzicht/reservering-overzicht.component";
 import {ReserveringAanmeldenComponent} from "./reservering-aanmelden/reservering-aanmelden.component";
-import {ReserveringAnnulerenComponent} from "./reservering-annuleren/reservering-annuleren.component";
 import {ReserveringService} from "./reservering-service.service";
 
 const appRoutes: Routes = [
   {path: 'reserveringOverzicht', component: ReserveringOverzichtComponent},
   {path: 'reserveringAanmelden/:id', component: ReserveringAanmeldenComponent, outlet: 'popup'},
-  {path: 'reserveringAnnuleren/:id', component: ReserveringAnnulerenComponent, outlet: 'popup'},
   {
     path: '',
     redirectTo: '/reserveringOverzicht',
@@ -28,8 +26,8 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  declarations: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent, ReserveringAnnulerenComponent],
-  exports: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent, ReserveringAnnulerenComponent],
+  declarations: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent],
+  exports: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent],
   providers: [ReserveringService,AuthenticationService]
 })
 export class ReserveringModule {

@@ -17,31 +17,30 @@ export class HardwareService {
   }
 
   getHardwareWithAmount(callback) {
-    var hardwareMap: Array<{key: string, naam: any, beschrijving: any, aantal: number}>;
+    var hardwareArray: any[] = [];
     let beschrijving;
     let naam;
     this.af.list('Hardware/').snapshotChanges().subscribe(actions => {
       actions.forEach(action => {
         var exemplaarList: Observable<any[]>;
+
         beschrijving = action.payload.val().beschrijving;
         naam = action.payload.val().naam;
+
         exemplaarList = this.af.list('Exemplaar', ref => ref.orderByChild('hardwareId').equalTo(action.key)).snapshotChanges();
         exemplaarList.subscribe(result => {
+
           length = result.length;
-          hardwareMap.push({
-            key:action.key,
-            naam: naam,
-            beschrijving: beschrijving,
-            aantal: length
-          });
+
+          hardwareArray.push(new Hardware(action.key,naam,beschrijving,length));
           console.log('TEST');
           /*
           let hardware = new Hardware(action.key, naam, beschrijving, length);
           console.log(hardware.beschrijving);*/
-          callback(hardwareMap);
+
         })
       });
-      callback(hardwareMap);
+      callback(hardwareArray);
     });
   }
 
