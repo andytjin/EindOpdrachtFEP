@@ -1,6 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!--https://codepen.io/colorlib/pen/rxddKy-->
-<app-authentication id="login" *ngIf="getSessionUserType() == 'none'"></app-authentication>
+
+<div class="login-page" *ngIf="getSessionUserType() == 'none'">
+<app-authentication id="login"></app-authentication>
+</div>
 <span *ngIf="getSessionUserType() != 'none' ">
 <div style="text-align:center">
   <input type="button" (click)="logout()" value="Logout">
