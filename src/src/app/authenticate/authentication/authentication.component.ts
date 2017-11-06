@@ -14,4 +14,5 @@ export class AuthenticationComponent implements OnInit {
   authenticate(username: string, password: string) {
     this.as.authenticate(username, password);
   }
+
 }
