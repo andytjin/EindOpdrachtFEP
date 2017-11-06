@@ -3,7 +3,9 @@ import {ExemplaarService} from '../exemplaar-service.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {slideInDownAnimation}   from '../../animations';
 import {ExemplaarStatus} from '../../shared/ExemplaarStatusEnum';
+import {Exemplaar} from '../../shared/Exemplaar';
 import {Observable} from "rxjs/Observable";
+import {ExecutionMetrics} from "jasmine-spec-reporter/built/execution-metrics";
 @Component({
   selector: 'app-exemplaar-wijzigen',
   templateUrl: './exemplaar-wijzigen.component.html',
@@ -22,7 +24,7 @@ export class ExemplaarWijzigenComponent implements OnInit {
   statusList: any;
   sub: any;
   id: any;
-  exemplaar: Observable<any>;
+  exemplaar: Exemplaar = new Exemplaar ('0', '0', '0', ExemplaarStatus.NIET_UITLEENBAAR, '0');
 
   constructor(private router: Router, public exemplaarservice: ExemplaarService, private route: ActivatedRoute,) {
     this.exemplaarService = exemplaarservice;
@@ -48,18 +50,20 @@ export class ExemplaarWijzigenComponent implements OnInit {
     this.router.navigate([{outlets: {popup: null}}]);
   }
 
-  saveExemplaar(hardwareid: any, serienummer: string,status:any) {
-    this.exemplaarService.wijzigExemplaar(hardwareid, serienummer,status);
+  saveExemplaar(serienummer: string,status:string) {
+    console.log(status);
+    this.exemplaarService.wijzigExemplaar(this.exemplaar.id, this.exemplaar.hardwareId, serienummer,status);
     this.closePopup();
   }
 
 
-
-  ngOnInit() {
+ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; // (+) converts string 'id' to a number
-      console.log(this.id);
-      this.exemplaar = this.exemplaarService.getExemplaar(this.id);
+
+      this.exemplaarService.getExemplaar(this.id, (exemplaar) => {
+        this.exemplaar = exemplaar;
+      });
       this.statusList = this.exemplaarService.getExemplaarStatusList();
     })
   }

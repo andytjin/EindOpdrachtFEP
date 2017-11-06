@@ -1,17 +1,18 @@
 <div class="popup">
   <br>
   <br>
-  Serienummer <input type="text" value="{{(exemplaar | async)?.serienummer}}" #serienummer required/><br>
+
+  Serienummer <input type="text" value="{{exemplaar.serienummer}}" #serienummer required/><br>
   <br>
-  <!--<select #status>-->
-    <!--<option *ngFor="let key of statusList | async" [value]="key">{{(exemplaar | async)?.status}}</option>-->
-  <!--</select>-->
-  <select #status>
-  <option *ngFor="let key of statusList" [value]="key.key">{{key.value}}</option>
+  Current Status: {{exemplaar.status}}<br>
+
+  Status<select #status>
+  <option *ngFor="let key of statusList" [value]="key.value">{{key.value}}</option>
   </select>
   <br>
   <p *ngIf="!sending"><button type="button" (click)="cancel()">Cancel</button>
-    <button type="button" (click)="saveExemplaar(id,serienummer.value,status.value)">Wijzigen</button>
+    <button type="button" (click)="saveExemplaar(serienummer.value, status.value)">Wijzigen</button>
   </p>
 </div>
+
 

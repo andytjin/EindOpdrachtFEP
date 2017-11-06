@@ -4,19 +4,40 @@
 import {ExemplaarStatus} from "../shared/ExemplaarStatusEnum";
 
 export class Exemplaar {
-  hardwareId: string;
-  serienummer: string;
-  status: ExemplaarStatus;
-  inleverdatum: string;
+  private _id: string;
+  private _hardwareId: string;
+  private _serienummer: string;
+  private _status: ExemplaarStatus;
+  private _inleverdatum: string;
 
-  constructor(hardwareId: string,
+  constructor(id: string, hardwareId: string,
               serienummer: string,
               status: ExemplaarStatus,
               inleverdatum: string) {
-    this.hardwareId = hardwareId;
-    this.serienummer = serienummer;
-    this.status = status;
-    this.inleverdatum = inleverdatum;
+    this._id = id;
+    this._hardwareId = hardwareId;
+    this._serienummer = serienummer;
+    this._status = status;
+    this._inleverdatum = inleverdatum;
   }
 
+  get id(): string {
+    return this._id;
+  }
+
+  get hardwareId(): string {
+    return this._hardwareId;
+  }
+
+  get serienummer(): string {
+    return this._serienummer;
+  }
+
+  get status(): ExemplaarStatus {
+    return this._status;
+  }
+
+  get inleverdatum(): string {
+    return this._inleverdatum;
+  }
 }

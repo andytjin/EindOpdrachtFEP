@@ -52,7 +52,8 @@ export class HardwareService {
   wijzigHardware(key: any, naam: string, beschrijving: string, afbeelding: File) {
     console.log(key + naam + beschrijving);
     var hardware = this.af.object('Hardware/' + key);
-    this.uploadPicture(afbeelding,key);
+    if (afbeelding != null){
+    this.uploadPicture(afbeelding,key);}
     hardware.update({
       naam: naam,
       beschrijving: beschrijving

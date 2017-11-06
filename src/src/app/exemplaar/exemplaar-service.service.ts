@@ -9,7 +9,7 @@ import {ExemplaarStatus} from "../shared/ExemplaarStatusEnum";
 @Injectable()
 export class ExemplaarService {
   exemplaarList: Observable<any[]>;
-  statusList: ExemplaarStatus;
+
 
   constructor(public af: AngularFireDatabase) {
     this.exemplaarList = af.list('/Exemplaar').snapshotChanges();
@@ -45,7 +45,6 @@ export class ExemplaarService {
   }
 
   wijzigExemplaar(key: any, hardwareid: any, serienummer: string, status: string) {
-
     var exemplaar = this.af.object('Exemplaar/' + key);
     exemplaar.update({
       hardwareId: hardwareid,
@@ -54,10 +53,20 @@ export class ExemplaarService {
     });
   }
 
-  getExemplaar(key: any) {
-    var exemplaar: Observable<any>;
-    exemplaar = this.af.object('Exemplaar/' + key).valueChanges();
-    return exemplaar;
+  getExemplaar(key: any, callback) {
+    let hardwareId;
+    let serienummer;
+    let status;
+    let inleverdatum;
+    this.af.object('Exemplaar/' + key).snapshotChanges().subscribe(action => {
+      hardwareId = action.payload.val().hardwareId;
+      serienummer = action.payload.val().serienummer;
+      status = action.payload.val().status;
+      inleverdatum = action.payload.val().inleverdatum;
+
+      var exemplaar = new Exemplaar(key ,hardwareId, serienummer, status, inleverdatum );
+      callback(exemplaar);
+    });
   }
 
   deleteExemplaar(key: any) {
@@ -66,9 +75,17 @@ export class ExemplaarService {
   }
 
   getExemplaarStatusList(){
-    return this.statusList;
-  }
+    const keyValue = [];
+    const keys = Object.keys(ExemplaarStatus).filter((value, index) => {
+      return !(index % 2);
+    });
 
+    for (const k of keys) {
+      keyValue.push({key: k, value: ExemplaarStatus[k]});
+    }
+
+    return keyValue;
+  }
 
 }
 
