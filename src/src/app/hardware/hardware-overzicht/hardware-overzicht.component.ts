@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Hardware} from '../../shared/Hardware';
 @Component({
   selector: 'app-hardware-overzicht',
   templateUrl: './hardware-overzicht.component.html',
@@ -8,12 +9,17 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HardwareOverzichtComponent implements OnInit {
   hardwareService: any;
+  studentMap: any[];
 
   constructor(private route: Router, public hardwareservice: HardwareService) {
     this.hardwareService = hardwareservice;
   }
 
   ngOnInit() {
+    this.hardwareService.getHardwareWithAmount((hardware) => {
+     this.studentMap = hardware;
+  });
+
   }
 
   deleteHardware(id: any) {
@@ -21,4 +27,6 @@ export class HardwareOverzichtComponent implements OnInit {
     this.hardwareService.deletePicture(id);
     return alert("Hardware succesfully deleted");
   }
+
+
 }

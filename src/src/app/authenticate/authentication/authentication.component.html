@@ -1,10 +1,15 @@
-<p>
-  <h3 id="header">Login</h3>
+
+<div class="form">
+  <form class="login-form">
+  <h3 id="header">LOGIN</h3>
   <br>
-  Username <input #Username/><br>
+  Username <input type="text" placeholder="username" #Username/><br>
   <br>
-  Password <input  #Password type="password"/><br>
+  Password <input  #Password placeholder="password" type="password"/><br>
   <br>
 <p>
   <button type="button" (click)="authenticate(Username.value, Password.value)">Login</button>
 </p>
+  </form>
+</div>
+
