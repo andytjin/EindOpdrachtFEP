@@ -18,8 +18,22 @@
     <td><input type="button" (click)="deleteHardware(hardware.payload.key)" src="https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiTlajdwZ3XAhVM6qQKHaDGAv0QjRwIBw&url=http%3A%2F%2Fwww.pvhc.net%2FSmall-Delete-Icon20tsezejah%2F&psig=AOvVaw30sfsJl47WItCh2G0W4gPA&ust=1509630410688876" alt="Delete" width="48" height="48" value="Verwijder"></td>
   </tr>
 </table>
-<router-outlet name="popup"></router-outlet>
 </div>
 <div *ngIf="hardwareService.getSessionUserType() == 'student'">
-  
+  <table>
+    <tr>
+      <th>Naam</th>
+      <th>Beschrijving</th>
+      <th>Voorraad</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let hardware of studentMap | async">
+      <td>{{hardware.naam}}</td>
+      <td>{{hardware.beschrijving}}</td>
+      <td>{{hardware.aantal}}</td>
+      <td><input type="button" value="Reserveer Mij"></td>
+    </tr>
+  </table>
+  <router-outlet name="popup"></router-outlet>
 </div>
+<router-outlet name="popup"></router-outlet>

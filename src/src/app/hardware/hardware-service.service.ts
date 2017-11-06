@@ -1,9 +1,10 @@
 //<reference path="../../../node_modules/firebase/app/index.d.ts"/>
-import {Injectable} from '@angular/core';
-import * as firebase from 'firebase/app';
+import {Injectable} from "@angular/core";
+import * as firebase from "firebase/app";
 import {AngularFireDatabase} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 import {AuthenticationService} from "../authenticate/authentication.service";
+import{ Hardware} from "../shared/Hardware";
 
 
 @Injectable()
@@ -11,10 +12,30 @@ export class HardwareService {
   logo: any;
   hardwareList: Observable<any[]>;
 
+
+
   constructor(public af: AngularFireDatabase, private as: AuthenticationService) {
     this.hardwareList = af.list('/Hardware').snapshotChanges();
   }
-
+  getHardwareWithAmount(callback) {
+    let hardwareMap:any[];
+    let beschrijving;
+    let naam;
+    this.af.list('Hardware/').snapshotChanges().subscribe(actions => {
+      actions.forEach(action => {
+        var exemplaarList: Observable<any[]>;
+        beschrijving = action.payload.val().beschrijving;
+        naam = action.payload.val().naam;
+        exemplaarList = this.af.list('Exemplaar', ref => ref.orderByChild('hardwareId').equalTo(action.key)).snapshotChanges();
+        exemplaarList.subscribe(result => {
+          length = result.length;
+          let hardware = new Hardware(action.key, naam, beschrijving, length);
+          hardwareMap.push(hardware);
+        })
+      });
+      callback(hardwareMap);
+    });
+  }
 
   uploadPicture(afbeelding: File, hardwareId: any) {
     let ref = firebase.storage().ref();
@@ -33,7 +54,7 @@ export class HardwareService {
     var Hardware = {
       naam: naam,
       beschrijving: beschrijving
-    }
+    };
     //maakt een lege hardware object aan met een unieke id
     //stopt het unieke id van de hardware object in een var
 
@@ -41,7 +62,7 @@ export class HardwareService {
 
     //voeg de inhoud toe aan de lege hardware object met de unieke id
     var updates = {};
-    updates['/Hardware/' + newPostKey] = Hardware
+    updates['/Hardware/' + newPostKey] = Hardware;
     //voeg de bijlage toe aan de firebase storage en refereer de afbeelding aan de hardware
     //door middel van de unieke id van de hardware
     this.uploadPicture(afbeelding, newPostKey);
@@ -52,8 +73,9 @@ export class HardwareService {
   wijzigHardware(key: any, naam: string, beschrijving: string, afbeelding: File) {
     console.log(key + naam + beschrijving);
     var hardware = this.af.object('Hardware/' + key);
-    if (afbeelding != null){
-    this.uploadPicture(afbeelding,key);}
+    if (afbeelding != null) {
+      this.uploadPicture(afbeelding, key);
+    }
     hardware.update({
       naam: naam,
       beschrijving: beschrijving
@@ -67,7 +89,7 @@ export class HardwareService {
 
     reader.onload = (e: any) => {
       this.logo = e.target.result;
-    }
+    };
     reader.readAsDataURL(fileInput.target.files[0]);
   }
 
@@ -84,7 +106,7 @@ export class HardwareService {
 
   getPicture(key: any) {
     var image: any;
-    var url:any;
+    var url: any;
     let ref = firebase.storage().ref();
     ref.child('/Hardware/' + key + '/' + key).getDownloadURL().then((url) => {
       //url is our firebase path which we store as a var imageUrl
