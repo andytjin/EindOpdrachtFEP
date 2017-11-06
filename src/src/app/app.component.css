@@ -5,3 +5,27 @@
   padding: 8% 0 0;
   margin: auto;
 }
+.logo{
+  margin-top: 20px;
+  margin-left:320px;
+}
+#logout{
+  float:right;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #19528c;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  margin-top:10px;
+  margin-right:10px;
+}
+#logout-button{
+  width:100%;
+  background-color:white;
+}
+h4{text-align:right
+}
