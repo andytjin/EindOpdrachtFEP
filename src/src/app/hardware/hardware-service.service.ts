@@ -12,13 +12,12 @@ export class HardwareService {
   logo: any;
   hardwareList: Observable<any[]>;
 
-
-
   constructor(public af: AngularFireDatabase, private as: AuthenticationService) {
     this.hardwareList = af.list('/Hardware').snapshotChanges();
   }
+
   getHardwareWithAmount(callback) {
-    let hardwareMap:any[];
+    var hardwareMap: Array<{key: string, naam: any, beschrijving: any, aantal: number}>;
     let beschrijving;
     let naam;
     this.af.list('Hardware/').snapshotChanges().subscribe(actions => {
@@ -29,8 +28,17 @@ export class HardwareService {
         exemplaarList = this.af.list('Exemplaar', ref => ref.orderByChild('hardwareId').equalTo(action.key)).snapshotChanges();
         exemplaarList.subscribe(result => {
           length = result.length;
+          hardwareMap.push({
+            key:action.key,
+            naam: naam,
+            beschrijving: beschrijving,
+            aantal: length
+          });
+          console.log('TEST');
+          /*
           let hardware = new Hardware(action.key, naam, beschrijving, length);
-          hardwareMap.push(hardware);
+          console.log(hardware.beschrijving);*/
+          callback(hardwareMap);
         })
       });
       callback(hardwareMap);
