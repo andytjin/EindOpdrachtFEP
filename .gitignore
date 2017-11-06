@@ -6,3 +6,5 @@ docs/Use case diagram/ucd\.vpp
 docs/Use case diagram/ucd\.vpp\.vbak
 
 \.idea/typescript-compiler\.xml
+
+src/package\.json

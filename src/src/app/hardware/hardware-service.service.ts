@@ -1,4 +1,4 @@
-///<reference path="../../../node_modules/firebase/app/index.d.ts"/>
+//<reference path="../../../node_modules/firebase/app/index.d.ts"/>
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {AngularFireDatabase} from "angularfire2/database";
@@ -20,12 +20,6 @@ export class HardwareService {
     let ref = firebase.storage().ref();
     let picture = ref.child('/Hardware/' + hardwareId + '/' + hardwareId);
     picture.put(afbeelding);
-  }
-
-  updatePicture(afbeelding: any, hardwareId: any) {
-    let ref = firebase.storage().ref();
-    let picture = ref.child('/Hardware/' + hardwareId + '/' + hardwareId);
-    picture.updateMetadata(afbeelding);
   }
 
   deletePicture(hardwareId: string) {
@@ -58,11 +52,12 @@ export class HardwareService {
   wijzigHardware(key: any, naam: string, beschrijving: string, afbeelding: File) {
     console.log(key + naam + beschrijving);
     var hardware = this.af.object('Hardware/' + key);
+    this.uploadPicture(afbeelding,key);
     hardware.update({
       naam: naam,
       beschrijving: beschrijving
     });
-    //this.updatePicture(afbeelding,key);
+
   }
 
   previewPictureOnChange(fileInput: any) {

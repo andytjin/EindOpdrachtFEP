@@ -9,22 +9,15 @@ import {ExemplaarStatus} from "../shared/ExemplaarStatusEnum";
 @Injectable()
 export class ExemplaarService {
   exemplaarList: Observable<any[]>;
+  statusList: ExemplaarStatus;
 
   constructor(public af: AngularFireDatabase) {
     this.exemplaarList = af.list('/Exemplaar').snapshotChanges();
   }
 //TODO - Hij kan Exemplaar objecten niet aan een array toevoegen
   getExemplarenById(id: any) {
-   var exemplarenById: Array<Exemplaar>;
-    firebase.database().ref().child("Exemplaar")
-      .orderByChild("hardwareId")
-      .equalTo(id)
-      .on("child_added", function(snapshot) {
-        var exem: Exemplaar = new Exemplaar(snapshot.val().hardwareId,snapshot.val().serienummer,snapshot.val().status,snapshot.val().inleverdatum);
-        console.log(exem);
-       //this.exemplarenById.push(exem);
-      });
-  }s
+    return this.af.list('Exemplaar', ref => ref.orderByChild('hardwareId').equalTo(id)).snapshotChanges();
+  }
 
   getHardwareList() {
     var hardwareList: Observable<any>;
@@ -41,7 +34,7 @@ export class ExemplaarService {
       inleverdatum:''
     }
     //maakt een lege exemplaar object aan met een unieke id
-    //stopt het unieke id van de hardware object in een var
+    //stopt het unieke id van de exemplaar object in een var
 
     var newPostKey = firebase.database().ref().child('Exemplaar').push().key;
 
@@ -70,6 +63,10 @@ export class ExemplaarService {
   deleteExemplaar(key: any) {
     const exemplaar = this.af.object('Exemplaar/' + key);
     exemplaar.remove();
+  }
+
+  getExemplaarStatusList(){
+    return this.statusList;
   }
 
 
