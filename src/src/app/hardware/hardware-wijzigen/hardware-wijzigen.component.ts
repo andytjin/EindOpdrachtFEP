@@ -2,7 +2,7 @@ import {Component, OnInit, HostBinding} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HardwareService} from '../hardware-service.service';
 import {Observable} from "rxjs/Observable";
-import {slideInDownAnimation}   from '../animations';
+import {slideInDownAnimation}   from '../../animations';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -31,9 +31,7 @@ export class HardwareWijzigenComponent implements OnInit {
       // In a real app: dispatch action to load the details here.
       this.hardwareToEdit = this.hardwareService.getHardware(this.id);
       this.getPicture(this.id);
-      console.log('HET WERKT NIET' + this.image);
-      //this.image ='https://firebasestorage.googleapis.com/v0/b/eindopdrachtfep.appspot.com/o/Hardware%2F-KxrVFHpTxkuUPYVSzuA%2F-KxrVFHpTxkuUPYVSzuA?alt=media&token=c6949ced-2656-4e33-b3ca-12ea3dceb8c7';
-    });
+       });
   }
 
   cancel() {
@@ -55,8 +53,6 @@ export class HardwareWijzigenComponent implements OnInit {
 
         //push out the listings array of data//
         // this.listingss.push(listings);
-        console.log(url);
-        console.log("this was a success");
       }
     )
   }

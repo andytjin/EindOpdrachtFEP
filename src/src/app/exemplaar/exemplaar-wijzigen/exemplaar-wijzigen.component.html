@@ -1,0 +1,18 @@
+<div class="popup">
+  <br>
+  <br>
+
+  Serienummer <input type="text" value="{{exemplaar.serienummer}}" #serienummer required/><br>
+  <br>
+  Current Status: {{exemplaar.status}}<br>
+
+  Status<select #status>
+  <option *ngFor="let key of statusList" [value]="key.value">{{key.value}}</option>
+  </select>
+  <br>
+  <p *ngIf="!sending"><button type="button" (click)="cancel()">Cancel</button>
+    <button type="button" (click)="saveExemplaar(serienummer.value, status.value)">Wijzigen</button>
+  </p>
+</div>
+
+

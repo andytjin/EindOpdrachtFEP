@@ -7,14 +7,23 @@ import {HardwareWijzigenComponent} from './hardware-wijzigen/hardware-wijzigen.c
 import {HardwareService} from './hardware-service.service'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationService} from "../authenticate/authentication.service";
+import {ExemplaarModule} from "../exemplaar/exemplaar.module";
 
 import {RouterModule, Routes} from '@angular/router';
+import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exemplaar-overzicht.component";
+import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
+import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exemplaar-wijzigen.component";
+import {ExemplaarVerwijderenComponent} from "../exemplaar/exemplaar-verwijderen/exemplaar-verwijderen.component";
 
 const appRoutes: Routes = [
   {path: 'hardwareOverzicht', component: HardwareOverzichtComponent},
   {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
   {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
-  {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'}
+  {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'},
+  { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
+  { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
+  { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
+  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
   ,
   {
     path: '',
@@ -27,12 +36,14 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    ExemplaarModule,
     RouterModule.forRoot(
       appRoutes
     )
   ],
   declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
-  exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent, ExemplaarOverzichtComponent
+    , ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent],
   providers: [HardwareService,AuthenticationService]
 })
 export class HardwareModule {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 import {AuthenticationService} from "../app/authenticate/authentication.service";
 @Component({
   selector: 'app-root',
@@ -7,18 +7,20 @@ import {AuthenticationService} from "../app/authenticate/authentication.service"
 })
 export class AppComponent {
   title = 'app';
-  constructor(private as:AuthenticationService){
+
+  constructor(private as: AuthenticationService) {
 
   }
-  logout(){
+
+  logout() {
     this.as.logout();
   }
+
   getSessionUser() {
     return this.as.getSessionUser();
   }
 
   getSessionUserType() {
-    console.log(this.as.getSessionUserType());
     return this.as.getSessionUserType();
   }
 

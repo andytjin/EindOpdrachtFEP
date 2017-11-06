@@ -1,7 +1,7 @@
 import { Component, OnInit,  HostBinding } from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import { Router } from '@angular/router';
-import { slideInDownAnimation }   from '../animations';
+import { slideInDownAnimation }   from '../../animations';
 @Component({
   selector: 'hardware-toevoegen',
   templateUrl: './hardware-toevoegen.component.html',
