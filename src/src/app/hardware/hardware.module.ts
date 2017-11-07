@@ -16,13 +16,10 @@ import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exempl
 import {ExemplaarVerwijderenComponent} from "../exemplaar/exemplaar-verwijderen/exemplaar-verwijderen.component";
 
 const appRoutes: Routes = [
-  {path: 'hardwareOverzicht', component: HardwareOverzichtComponent, children:[
-    {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
-    {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
-    {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'}
-
-  ]},
-
+  {path: 'hardwareOverzicht', component: HardwareOverzichtComponent},
+  {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
+  {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
+  {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'},
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
   { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
@@ -41,13 +38,13 @@ const appRoutes: Routes = [
     CommonModule,
     BrowserAnimationsModule,
     ExemplaarModule,
-    RouterModule.forChild(
+    RouterModule.forRoot(
       appRoutes
     )
   ],
   declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent,ReserveringAanmeldenComponent, HardwareWijzigenComponent],
   exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent, ExemplaarOverzichtComponent
-    ,ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent,ReserveringAanmeldenComponent, RouterModule],
+    , ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent,ReserveringAanmeldenComponent],
   providers: [HardwareService,AuthenticationService]
 })
 export class HardwareModule {
