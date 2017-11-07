@@ -8,6 +8,7 @@ import {ExemplaarService} from './exemplaar-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {RouterModule, Routes, Router} from '@angular/router';
+import {AuthenticationService} from "../authenticate/authentication.service";
 
 const appRoutes: Routes = [
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent,
@@ -35,6 +36,6 @@ const appRoutes: Routes = [
   ],
   declarations: [ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent],
   exports:[ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent, RouterModule],
-  providers:[ExemplaarService]
+  providers:[ExemplaarService,AuthenticationService]
 })
 export class ExemplaarModule { }

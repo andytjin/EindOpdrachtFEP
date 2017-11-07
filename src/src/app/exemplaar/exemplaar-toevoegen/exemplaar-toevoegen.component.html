@@ -1,4 +1,4 @@
-<div class="popup">
+<div  class="popup" *ngIf="exemplaarService.getSessionUserType() == 'medewerker'">
   <br>
   <br>
   Serienummer <input type="text" #serienummer required/><br>

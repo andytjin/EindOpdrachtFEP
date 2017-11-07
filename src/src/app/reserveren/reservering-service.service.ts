@@ -45,7 +45,7 @@ export class ReserveringService {
             action.payload.val().studentNaam,
             action.payload.val().hardwareId,
             action.payload.val().hardwareNaam,
-            action.payload.val().datumAangevraagd,
+            action.payload.val().reserveringsDatum,
             action.payload.val().status,
             action.payload.val().terugbrengdatum,
             action.payload.val().aantal));
@@ -71,18 +71,18 @@ export class ReserveringService {
   }
 
   terugBrengDatum() {
-    var currentDate = new Date()
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 7
-    var year = currentDate.getFullYear()
+    var currentDate = new Date();
+    var day = currentDate.getDate() + 7;
+    var month = currentDate.getMonth();
+    var year = currentDate.getFullYear();
     return ("" + (day + "/" + month + "/" + year));
   }
 
   huidigeDatum() {
-    var currentDate = new Date()
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
     return ("" + (day + "/" + month + "/" + year));
   }
 

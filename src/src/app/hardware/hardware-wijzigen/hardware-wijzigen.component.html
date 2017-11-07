@@ -1,4 +1,4 @@
-<div class="popup">
+<div class="popup" *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
   <img [src]="image" alt="Voorbeeld afbeelding" height="100px" width="100px">
   <input type="file" (change)="hardwareService.previewPictureOnChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
   <br>

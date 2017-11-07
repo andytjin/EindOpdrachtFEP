@@ -27,6 +27,7 @@ export class ReserveringOverzichtComponent implements OnInit {
 
   annuleerReservering(id: string) {
     this.reserveringService.annuleerReservering(id);
+    location.reload();
     alert('Reservering succesvol geannuleerd!');
   }
 

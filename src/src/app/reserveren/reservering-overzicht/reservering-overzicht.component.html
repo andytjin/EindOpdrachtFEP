@@ -22,7 +22,7 @@
           <td>{{reservering.payload.val().studentNaam}}</td>
           <td>{{reservering.payload.val().hardwareNaam}}</td>
           <td>{{reservering.payload.val().aantal}}</td>
-          <td>{{reservering.payload.val().datumAangevraagd}}</td>
+          <td>{{reservering.payload.val().reserveringsDatum}}</td>
           <td>{{reservering.payload.val().terugbrengdatum}}</td>
           <td>{{reservering.payload.val().status}}</td>
           <td><input type="button" (click)="updateToNextStatus(reservering.key, reservering.payload.val().status)" value="Update" *ngIf="reservering.payload.val().status != 'GEANNULEERD' && reservering.payload.val().status != 'AFGEROND'"/></td>

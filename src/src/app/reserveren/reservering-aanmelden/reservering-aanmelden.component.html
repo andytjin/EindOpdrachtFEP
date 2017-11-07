@@ -1,4 +1,4 @@
-<div class="popup">
+<div class="popup" *ngIf="hardwareService.getSessionUserType() == 'student'">
   <img [src]="image" alt="Voorbeeld afbeelding" height="100px" width="100px">
   <br>
   Naam {{(hardwareInformation | async)?.naam}}<br>
