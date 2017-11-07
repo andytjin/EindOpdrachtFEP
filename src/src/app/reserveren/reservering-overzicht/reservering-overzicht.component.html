@@ -1,3 +1,30 @@
-<p>
-  reservering-overzicht works!
-</p>
+<div *ngIf="hardwareService.getSessionUserType() == 'student'">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Status</th>
+        <th>Terugbreng Datum</th>
+        <th></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      <tr *ngFor="let reservering of reserveringMap">
+        <td>{{reservering.naam}}</td>
+        <td>{{reservering.status}}</td>
+        <td>{{reservering.terugbrengdatum}}</td>
+        <td><span *ngIf="reservering.status == 'IN BEHANDELING' || reservering.status == 'STAAT KLAAR'; then in_progress else elseCase"></span></td>
+        <ng-template #in_progress><input type="button" (click)="annuleerReservering(reservering.id)" value="Annuleer Reservering"></ng-template>
+        <ng-template #elseCase>Kan niet geannuleerd worden</ng-template>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet name="popup"></router-outlet>
+</div>

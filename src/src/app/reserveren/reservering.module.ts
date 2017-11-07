@@ -7,6 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ReserveringOverzichtComponent} from "./reservering-overzicht/reservering-overzicht.component";
 import {ReserveringAanmeldenComponent} from "./reservering-aanmelden/reservering-aanmelden.component";
 import {ReserveringService} from "./reservering-service.service";
+import {HardwareService} from "../hardware/hardware-service.service";
 
 const appRoutes: Routes = [
   {path: 'reserveringOverzicht', component: ReserveringOverzichtComponent},
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
   ],
   declarations: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent],
   exports: [ReserveringOverzichtComponent, ReserveringAanmeldenComponent],
-  providers: [ReserveringService,AuthenticationService]
+  providers: [ReserveringService,AuthenticationService,HardwareService]
 })
 export class ReserveringModule {
 }

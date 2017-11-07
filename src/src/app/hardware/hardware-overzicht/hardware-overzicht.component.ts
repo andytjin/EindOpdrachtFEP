@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Hardware} from '../../shared/Hardware';
+
+
 @Component({
   selector: 'app-hardware-overzicht',
   templateUrl: './hardware-overzicht.component.html',
