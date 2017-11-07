@@ -14,6 +14,7 @@ import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exem
 import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
 import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exemplaar-wijzigen.component";
 import {ExemplaarVerwijderenComponent} from "../exemplaar/exemplaar-verwijderen/exemplaar-verwijderen.component";
+import {ReserveringModule} from "../reserveren/reservering.module";
 
 const appRoutes: Routes = [
   {path: 'hardwareOverzicht', component: HardwareOverzichtComponent, children:[
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
   { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'},
-  {path: 'reserveringAanmelden/:id', component: ReserveringAanmeldenComponent, outlet: 'popup'}
+  {path: 'reserveringAanmelden/:id/:aantal', component: ReserveringAanmeldenComponent, outlet: 'popup'}
   ,
   {
     path: '',
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     CommonModule,
     BrowserAnimationsModule,
     ExemplaarModule,
+    ReserveringModule,
     RouterModule.forChild(
       appRoutes
     )

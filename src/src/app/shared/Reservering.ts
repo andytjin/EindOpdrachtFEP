@@ -1,23 +1,37 @@
 import {ReserveringEnum} from "../shared/ReserveringEnum";
 
 export class Reservering {
+  get aantal(): number {
+    return this._aantal;
+  }
 
+  set aantal(value: number) {
+    this._aantal = value;
+  }
   private _id: string;
   private _studentNaam:string;
   private _hardwareId: string;
+  private _harwareNaam: string;
   private _reserveringsDatum: string;
   private _status: ReserveringEnum;
   private _terugbrengdatum: string;
+  private _aantal: number;
 
-  constructor(id: string, studentNaam: string, hardwareId: string, reserveringsDatum: string, status: ReserveringEnum, terugbrengdatum: string) {
+
+  constructor(id: string, studentNaam: string, hardwareId: string, harwareNaam: string, reserveringsDatum: string, status: ReserveringEnum, terugbrengdatum: string, aantal: number) {
     this._id = id;
     this._studentNaam = studentNaam;
     this._hardwareId = hardwareId;
+    this._harwareNaam = harwareNaam;
     this._reserveringsDatum = reserveringsDatum;
     this._status = status;
     this._terugbrengdatum = terugbrengdatum;
+    this._aantal = aantal;
   }
 
+  get hardwareNaam(): string {
+    return this._harwareNaam;
+  }
 
   get id(): string {
     return this._id;
@@ -25,10 +39,6 @@ export class Reservering {
 
   get studentNaam(): string {
     return this._studentNaam;
-  }
-
-  get hardwareNaam(): string {
-    return this._hardwareId;
   }
 
   get reserveringsDatum(): string {
@@ -52,9 +62,6 @@ export class Reservering {
     this._studentNaam = value;
   }
 
-  set hardwareNaam(value: string) {
-    this._hardwareId = value;
-  }
 
   set reserveringsDatum(value: string) {
     this._reserveringsDatum = value;
@@ -68,12 +75,4 @@ export class Reservering {
     this._terugbrengdatum = value;
   }
 
- /* function terugBrengDatum(this: void){
-    var currentDate = new Date()
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-  this._terugbrengdatum = (""+(day + "/" + month + "/" + year));
-  }
-*/
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Hardware} from '../../shared/Hardware';
-
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-hardware-overzicht',

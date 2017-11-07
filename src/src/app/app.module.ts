@@ -22,8 +22,6 @@ const appRoutes: Routes = [
  {path: 'reserveringOverzicht', component: ReserveringOverzichtComponent,outlet:'overzicht'},
   {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
   {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
-
-
   {
     path: '',
     redirectTo: '',
