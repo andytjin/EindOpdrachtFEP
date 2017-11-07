@@ -8,8 +8,8 @@ import {AuthenticationService} from "../app/authenticate/authentication.service"
 export class AppComponent {
   title = 'app';
 
-  constructor(private as: AuthenticationService) {
 
+  constructor(private as: AuthenticationService) {
   }
 
   logout() {
