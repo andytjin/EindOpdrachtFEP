@@ -8,7 +8,7 @@ import {HardwareService} from './hardware-service.service'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationService} from "../authenticate/authentication.service";
 import {ExemplaarModule} from "../exemplaar/exemplaar.module";
-
+import {ReserveringAanmeldenComponent} from "../reserveren/reservering-aanmelden/reservering-aanmelden.component"
 import {RouterModule, Routes} from '@angular/router';
 import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exemplaar-overzicht.component";
 import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
@@ -23,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
   { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
-  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
+  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'},
+  {path: 'reserveringAanmelden/:id', component: ReserveringAanmeldenComponent, outlet: 'popup'}
   ,
   {
     path: '',
@@ -41,9 +42,9 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent,ReserveringAanmeldenComponent, HardwareWijzigenComponent],
   exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent, ExemplaarOverzichtComponent
-    , ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent],
+    , ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent,ReserveringAanmeldenComponent],
   providers: [HardwareService,AuthenticationService]
 })
 export class HardwareModule {
