@@ -86,6 +86,15 @@ export class ReserveringService {
     return ("" + (day + "/" + month + "/" + year));
   }
 
+  terugBrengDatumIsOverschreden(terugBrengDatumString: string) {
+    const today = new Date();
+
+    const parts: string[] = terugBrengDatumString.split('/');
+    const terugBrengDatum = new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+
+    return terugBrengDatum <= today;
+  }
+
   requestReservering(studentNaam: string, hardwareId: string, hardwareNaam: string, aantal: string) {
 
     var reservering = {
