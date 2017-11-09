@@ -1,0 +1,5 @@
+<select #hardwareId>
+  <option *ngFor="let hardware of hardwareList | async"
+          [value]="hardware.payload.val().key">{{hardware.payload.val().naam}}
+  </option>
+</select>

@@ -1,0 +1,21 @@
+<div class="popup" *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
+  <img [src]="image" alt="Voorbeeld afbeelding" height="100px" width="100px">
+  <input type="file" (change)="hardwareService.previewPictureOnChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
+  <br>
+  Naam<input #naam value="{{(hardwareToEdit | async)?.naam}}"/><br>
+  <br>
+  Beschrijving<input #beschrijving value="{{(hardwareToEdit | async)?.beschrijving}}"/><br>
+  <br>
+
+  <app-exemplaar-overzicht></app-exemplaar-overzicht>
+  <p *ngIf="!sending">
+    <button type="button" class="btn" (click)="cancel()">Annuleren</button>
+    <button type="button" class="btn btn-primary" (click)="saveHardware(id, naam.value, beschrijving.value,fileinput.files[0])">
+      Opslaan
+    </button>
+  </p>
+
+</div>
+
+
+

@@ -1,0 +1,15 @@
+
+<div class="form">
+  <form class="login-form">
+  <h3 id="header">LOGIN</h3>
+  <br>
+  Username <input type="text" placeholder="username" #Username/><br>
+  <br>
+  Password <input  #Password placeholder="password" type="password"/><br>
+  <br>
+<p>
+  <button type="button" [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="authenticate(Username.value, Password.value)">Login</button>
+</p>
+  </form>
+</div>
+

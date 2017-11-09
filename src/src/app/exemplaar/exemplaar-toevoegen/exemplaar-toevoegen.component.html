@@ -1,0 +1,9 @@
+<div  class="popup" *ngIf="exemplaarService.getSessionUserType() == 'medewerker'">
+  <br>
+  <br>
+  Serienummer <input type="text" #serienummer required/><br>
+  <br>
+  <p *ngIf="!sending"><button type="button" class="btn" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveExemplaar(id,serienummer.value)">Toevoegen</button>
+  </p>
+</div>

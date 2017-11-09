@@ -1,0 +1,72 @@
+<div class="overzicht">
+  <h2>Hardware overzicht</h2>
+  <div *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
+    <input type="button" class="btn btn-primary" (click)="openNieuweHardwareModal(content)"
+           value="Nieuwe Hardware">
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Beschrijving</th>
+          <th>Details</th>
+          <th>Verwijder Hardware</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let hardware of hardwareService.hardwareList | async">
+          <td>{{hardware.payload.val().naam}}</td>
+          <td>{{hardware.payload.val().beschrijving}}</td>
+          <td>
+            <a [routerLink]="['',{ outlets: { popup: ['hardwareWijzigen', hardware.payload.key] } }]">Hardware
+              Details</a>
+          </td>
+          <td><input class="btn" type="button" (click)="deleteHardware(hardware.payload.key)" value="Verwijder"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="hardwareService.getSessionUserType() == 'student'">
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Beschrijving</th>
+          <th>Voorraad</th>
+          <th></th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let hardware of studentMap">
+          <td>{{hardware.naam}}</td>
+          <td>{{hardware.beschrijving}}</td>
+          <td>{{hardware.aantal}}</td>
+          <td><span *ngIf="hardware.aantal > 0; then voorraad else geen_voorraad"></span></td>
+          <ng-template #voorraad><input type="button" class="btn"
+            [routerLink]="['',{ outlets: { popup: ['reserveringAanmelden', hardware.id, hardware.aantal] } }]" value="Reserveer Mij"></ng-template>
+          <ng-template #geen_voorraad>Geen Voorraad</ng-template>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+
+  <pre>{{closeResult}}</pre>
+
+  <router-outlet></router-outlet>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <hardware-toevoegen></hardware-toevoegen>
+  </ng-template>
+</div>

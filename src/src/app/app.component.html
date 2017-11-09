@@ -1,0 +1,32 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!--https://codepen.io/colorlib/pen/rxddKy-->
+<div class="login-page" *ngIf="getSessionUserType() == 'none'">
+  <app-authentication id="login"></app-authentication>
+</div>
+<span *ngIf="getSessionUserType() != 'none' ">
+  <div style="text-align:center">
+  <img class="logo" width="300"
+       src="https://www.hu.nl/includes/img/HU-Platform/hu-logo-nl.svg"><br/>
+    <a id="logout">Welkom {{getSessionUser()}}</a>
+
+  </div>
+
+    <span *ngIf="getSessionUserType() == 'medewerker'">
+      <ul class="nav">
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]">Hardware Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['reserveringOverzicht'] } }]">Reservering Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="logout()">Logout</a></li>
+      </ul>
+    </span>
+    <span *ngIf="getSessionUserType() == 'student'">
+      <ul class="nav">
+        <li><a [routerLink]="[{ outlets: { overzicht: ['reserveringOverzicht'] } }]">Reservering Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]">Hardware Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="logout()">Logout</a></li>
+      </ul>
+    </span>
+    <span *ngIf="getSessionUserType() == 'medewerker'"></span>
+  <router-outlet name="overzicht"></router-outlet>
+  <router-outlet name="popup"></router-outlet>
+<br>
+</span>
