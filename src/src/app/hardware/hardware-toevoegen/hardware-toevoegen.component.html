@@ -1,1 +1,20 @@
-
+<div class="modal-header">
+  <h4 class="modal-title">Hardware toevoegen</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeNieuweHardwareModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <input type="file" class="custom" (change)="hardwareService.previewPictureOnChange($event)"
+         accept=".jpg, .jpeg, .png" #fileinput/>
+  <img [src]="hardwareService.logo" alt="Voorbeeld afbeelding" height="100px" width="100px">
+  <br>
+  Naam<input #naam/><br>
+  <br>
+  Beschrijving<input #beschrijving/><br>
+  <br>
+</div>
+<div *ngIf="!sending" class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="closeNieuweHardwareModal()">Cancel</button>
+  <button type="button" class="btn btn-outline" (click)="saveHardware(naam.value, beschrijving.value,fileinput.files[0])">Toevoegen</button>
+</div>

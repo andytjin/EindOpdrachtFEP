@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Hardware} from '../../shared/Hardware';
 import {Observable} from "rxjs/Observable";
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-hardware-overzicht',
@@ -15,6 +15,7 @@ export class HardwareOverzichtComponent implements OnInit {
   hardwareService: any;
   studentMap: any[];
   closeResult: string;
+  hardwareToevoegenModal: NgbModalRef;
 
   constructor(private route: Router, public hardwareservice: HardwareService, private modalService: NgbModal) {
     this.hardwareService = hardwareservice;
@@ -34,11 +35,11 @@ export class HardwareOverzichtComponent implements OnInit {
   };
 
   openNieuweHardwareModal(content) {
-      this.modalService.open(content).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
+      this.hardwareToevoegenModal = this.modalService.open(content);
+  }
+
+  closeNieuweHardwareModal() {
+    this.hardwareToevoegenModal.close();
   }
 
   private getDismissReason(reason: any): string {

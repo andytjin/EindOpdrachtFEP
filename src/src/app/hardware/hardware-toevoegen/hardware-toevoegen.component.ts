@@ -1,25 +1,28 @@
 import { Component, OnInit,  HostBinding } from '@angular/core';
 import {HardwareService} from '../hardware-service.service';
 import { Router } from '@angular/router';
-import { slideInDownAnimation }   from '../../animations';
+import {HardwareOverzichtComponent} from "../hardware-overzicht/hardware-overzicht.component";
 
 @Component({
   selector: 'hardware-toevoegen',
   templateUrl: './hardware-toevoegen.component.html',
-  styleUrls: [ './hardware-toevoegen.component.css' ],
-  animations: [ slideInDownAnimation ]
+  styleUrls: [ './hardware-toevoegen.component.css' ]
 })
 export class HardwareToevoegenComponent implements OnInit {
-  @HostBinding('@routeAnimation') routeAnimation = true;
-  @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.position')  position = 'absolute';
   hardwareService:any;
   details: string;
   sending = false;
+  hardwareOverzicht: HardwareOverzichtComponent;
 
-  constructor(private router: Router,public hardwareservice:HardwareService) {
+  constructor(private router: Router,public hardwareservice:HardwareService, public hardwareO:HardwareOverzichtComponent) {
     this.hardwareService = hardwareservice;
+    this.hardwareOverzicht = hardwareO;
   }
+
+  closeNieuweHardwareModal() {
+    this.hardwareOverzicht.closeNieuweHardwareModal();
+  }
+
   send() {
     this.sending = true;
     this.details = 'Sending Message...';
@@ -42,7 +45,7 @@ export class HardwareToevoegenComponent implements OnInit {
 
   saveHardware(naam: string, beschrijving: string, afbeelding: File) {
     this.hardwareService.voegHardwareToe(naam, beschrijving, afbeelding);
-    this.closePopup();
+    this.closeNieuweHardwareModal();
   }
 
   ngOnInit() {
