@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ExemplaarOverzichtComponent } from './exemplaar-overzicht/exemplaar-overzicht.component';
 import { ExemplaarToevoegenComponent } from './exemplaar-toevoegen/exemplaar-toevoegen.component';
 import { ExemplaarWijzigenComponent } from './exemplaar-wijzigen/exemplaar-wijzigen.component';
-import { ExemplaarVerwijderenComponent } from './exemplaar-verwijderen/exemplaar-verwijderen.component';
 import {ExemplaarService} from './exemplaar-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,7 +14,6 @@ const appRoutes: Routes = [
     children:[
     { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
     { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
-    { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
 
   ]},
 
@@ -34,8 +32,8 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  declarations: [ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent],
-  exports:[ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent, RouterModule],
+  declarations: [ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent],
+  exports:[ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, RouterModule],
   providers:[ExemplaarService,AuthenticationService]
 })
 export class ExemplaarModule { }

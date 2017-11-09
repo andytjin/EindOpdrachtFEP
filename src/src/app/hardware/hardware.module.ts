@@ -13,7 +13,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exemplaar-overzicht.component";
 import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
 import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exemplaar-wijzigen.component";
-import {ExemplaarVerwijderenComponent} from "../exemplaar/exemplaar-verwijderen/exemplaar-verwijderen.component";
 import {ReserveringModule} from "../reserveren/reservering.module";
 
 const appRoutes: Routes = [
@@ -27,7 +26,6 @@ const appRoutes: Routes = [
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
   { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
-  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'},
   {path: 'reserveringAanmelden/:id/:aantal', component: ReserveringAanmeldenComponent, outlet: 'popup'}
   ,
   {
@@ -49,7 +47,7 @@ const appRoutes: Routes = [
   ],
   declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent,ReserveringAanmeldenComponent, HardwareWijzigenComponent],
   exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent, ExemplaarOverzichtComponent
-    ,ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent,ReserveringAanmeldenComponent, RouterModule],
+    ,ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ReserveringAanmeldenComponent, RouterModule],
   providers: [HardwareService,AuthenticationService]
 })
 export class HardwareModule {
