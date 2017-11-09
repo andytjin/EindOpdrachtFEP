@@ -8,22 +8,27 @@ import {HardwareService} from './hardware-service.service'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationService} from "../authenticate/authentication.service";
 import {ExemplaarModule} from "../exemplaar/exemplaar.module";
-
+import {ReserveringAanmeldenComponent} from "../reserveren/reservering-aanmelden/reservering-aanmelden.component"
 import {RouterModule, Routes} from '@angular/router';
 import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exemplaar-overzicht.component";
 import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
 import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exemplaar-wijzigen.component";
 import {ExemplaarVerwijderenComponent} from "../exemplaar/exemplaar-verwijderen/exemplaar-verwijderen.component";
+import {ReserveringModule} from "../reserveren/reservering.module";
 
 const appRoutes: Routes = [
-  {path: 'hardwareOverzicht', component: HardwareOverzichtComponent},
-  {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
-  {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
-  {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'},
+  {path: 'hardwareOverzicht', component: HardwareOverzichtComponent, children:[
+    {path: 'hardwareToevoegen', component: HardwareToevoegenComponent, outlet: 'popup'},
+    {path: 'hardwareWijzigen/:id', component: HardwareWijzigenComponent, outlet: 'popup'},
+    {path: 'hardwareVerwijderen/:id', component: HardwareVerwijderenComponent, outlet: 'popup'}
+
+  ]},
+
   { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
   { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
   { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
-  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
+  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'},
+  {path: 'reserveringAanmelden/:id/:aantal', component: ReserveringAanmeldenComponent, outlet: 'popup'}
   ,
   {
     path: '',
@@ -37,13 +42,14 @@ const appRoutes: Routes = [
     CommonModule,
     BrowserAnimationsModule,
     ExemplaarModule,
-    RouterModule.forRoot(
+    ReserveringModule,
+    RouterModule.forChild(
       appRoutes
     )
   ],
-  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent],
+  declarations: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent,ReserveringAanmeldenComponent, HardwareWijzigenComponent],
   exports: [HardwareOverzichtComponent, HardwareToevoegenComponent, HardwareVerwijderenComponent, HardwareWijzigenComponent, ExemplaarOverzichtComponent
-    , ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent],
+    ,ExemplaarToevoegenComponent, ExemplaarWijzigenComponent,ExemplaarVerwijderenComponent,ReserveringAanmeldenComponent, RouterModule],
   providers: [HardwareService,AuthenticationService]
 })
 export class HardwareModule {

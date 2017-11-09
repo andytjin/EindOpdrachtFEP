@@ -7,14 +7,19 @@ import { ExemplaarVerwijderenComponent } from './exemplaar-verwijderen/exemplaar
 import {ExemplaarService} from './exemplaar-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RouterModule, Routes } from '@angular/router';
+import {RouterModule, Routes, Router} from '@angular/router';
+import {AuthenticationService} from "../authenticate/authentication.service";
 
 const appRoutes: Routes = [
-  { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent  },
-  { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
-  { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
-  { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
-  ,
+  { path: 'exemplaarOverzicht', component:ExemplaarOverzichtComponent,
+    children:[
+    { path: 'exemplaarToevoegen/:id', component:ExemplaarToevoegenComponent, outlet:'popup'},
+    { path: 'exemplaarWijzigen/:id', component: ExemplaarWijzigenComponent, outlet:'popup' },
+    { path: 'exemplaarVerwijderen/:id', component: ExemplaarVerwijderenComponent, outlet:'popup'}
+
+  ]},
+
+
   { path: '',
     redirectTo: '/exemplaarOverzicht',
     pathMatch: 'full'
@@ -25,12 +30,12 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(
+    RouterModule.forChild(
       appRoutes
     )
   ],
   declarations: [ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent],
-  exports:[ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent],
-  providers:[ExemplaarService]
+  exports:[ExemplaarOverzichtComponent, ExemplaarToevoegenComponent, ExemplaarWijzigenComponent, ExemplaarVerwijderenComponent, RouterModule],
+  providers:[ExemplaarService,AuthenticationService]
 })
 export class ExemplaarModule { }

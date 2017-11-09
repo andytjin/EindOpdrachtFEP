@@ -1,0 +1,69 @@
+<div name="overzicht">
+  <div *ngIf="reserveringService.getSessionUserType() == 'medewerker'">
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Reserveerder</th>
+          <th>Hardware</th>
+          <th>Aantal</th>
+          <th>Datum</th>
+          <th>Uiterste Terugbreng Datum</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let reservering of allReserveringen | async">
+          <td>{{reservering.payload.val().studentNaam}}</td>
+          <td>{{reservering.payload.val().hardwareNaam}}</td>
+          <td>{{reservering.payload.val().aantal}}</td>
+          <td>{{reservering.payload.val().reserveringsDatum}}</td>
+          <td class="warning" *ngIf="reserveringService.terugBrengDatumIsOverschreden(reservering.payload.val().terugbrengdatum)">
+            {{reservering.payload.val().terugbrengdatum}}
+          </td>
+          <td *ngIf="!reserveringService.terugBrengDatumIsOverschreden(reservering.payload.val().terugbrengdatum)">
+            {{reservering.payload.val().terugbrengdatum}}
+          </td>
+          <td>{{reservering.payload.val().status}}</td>
+          <td><input type="button" (click)="updateToNextStatus(reservering.key, reservering.payload.val().status)" value="Update" *ngIf="reservering.payload.val().status != 'GEANNULEERD' && reservering.payload.val().status != 'AFGEROND'"/></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <router-outlet name="popup"></router-outlet>
+  </div>
+<div *ngIf="reserveringService.getSessionUserType() == 'student'">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Status</th>
+        <th>Terugbreng Datum</th>
+        <th></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      <tr *ngFor="let reservering of reserveringMap">
+        <td>{{reservering.hardwareNaam}}</td>
+        <td>{{reservering.status}}</td>
+        <td>{{reservering.terugbrengdatum}}</td>
+        <td><span *ngIf="reservering.status == 'IN BEHANDELING' || reservering.status == 'STAAT KLAAR'; then in_progress else elseCase"></span></td>
+        <ng-template #in_progress><input type="button" (click)="annuleerReservering(reservering.id)" value="Annuleer Reservering"></ng-template>
+        <ng-template #elseCase>Kan niet geannuleerd worden</ng-template>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<router-outlet name="popup"></router-outlet>
+</div>
+</div>

@@ -17,31 +17,17 @@ export class HardwareService {
   }
 
   getHardwareWithAmount(callback) {
-    var hardwareMap: Array<{key: string, naam: any, beschrijving: any, aantal: number}>;
-    let beschrijving;
-    let naam;
+    var hardwareArray: any[] = [];
     this.af.list('Hardware/').snapshotChanges().subscribe(actions => {
       actions.forEach(action => {
         var exemplaarList: Observable<any[]>;
-        beschrijving = action.payload.val().beschrijving;
-        naam = action.payload.val().naam;
         exemplaarList = this.af.list('Exemplaar', ref => ref.orderByChild('hardwareId').equalTo(action.key)).snapshotChanges();
         exemplaarList.subscribe(result => {
-          length = result.length;
-          hardwareMap.push({
-            key:action.key,
-            naam: naam,
-            beschrijving: beschrijving,
-            aantal: length
-          });
-          console.log('TEST');
-          /*
-          let hardware = new Hardware(action.key, naam, beschrijving, length);
-          console.log(hardware.beschrijving);*/
-          callback(hardwareMap);
+          hardwareArray.push(new Hardware(action.key,action.payload.val().naam,action.payload.val().beschrijving, result.length));
         })
       });
-      callback(hardwareMap);
+      callback(hardwareArray);
+
     });
   }
 
@@ -79,7 +65,6 @@ export class HardwareService {
   }
 
   wijzigHardware(key: any, naam: string, beschrijving: string, afbeelding: File) {
-    console.log(key + naam + beschrijving);
     var hardware = this.af.object('Hardware/' + key);
     if (afbeelding != null) {
       this.uploadPicture(afbeelding, key);

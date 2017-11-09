@@ -4,6 +4,7 @@ import {AngularFireDatabase} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 import {Exemplaar} from "../shared/Exemplaar";
 import {ExemplaarStatus} from "../shared/ExemplaarStatusEnum";
+import {AuthenticationService} from "../authenticate/authentication.service";
 
 
 @Injectable()
@@ -11,7 +12,7 @@ export class ExemplaarService {
   exemplaarList: Observable<any[]>;
 
 
-  constructor(public af: AngularFireDatabase) {
+  constructor(public af: AngularFireDatabase, public as: AuthenticationService) {
     this.exemplaarList = af.list('/Exemplaar').snapshotChanges();
   }
 //TODO - Hij kan Exemplaar objecten niet aan een array toevoegen
@@ -87,5 +88,12 @@ export class ExemplaarService {
     return keyValue;
   }
 
+  getSessionUser() {
+    return this.as.getSessionUser();
+  }
+
+  getSessionUserType() {
+    return this.as.getSessionUserType();
+  }
 }
 

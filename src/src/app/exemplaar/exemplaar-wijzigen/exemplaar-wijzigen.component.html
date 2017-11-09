@@ -1,17 +1,15 @@
-<div class="popup">
+<div class="popup" *ngIf="exemplaarService.getSessionUserType() == 'medewerker'">
   <br>
   <br>
-
   Serienummer <input type="text" value="{{exemplaar.serienummer}}" #serienummer required/><br>
   <br>
   Current Status: {{exemplaar.status}}<br>
-
-  Status<select #status>
+  Status<select class="dropdown show" #status>
   <option *ngFor="let key of statusList" [value]="key.value">{{key.value}}</option>
   </select>
   <br>
-  <p *ngIf="!sending"><button type="button" (click)="cancel()">Cancel</button>
-    <button type="button" (click)="saveExemplaar(serienummer.value, status.value)">Wijzigen</button>
+  <p *ngIf="!sending"><button type="button" class="btn" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveExemplaar(serienummer.value, status.value)">Wijzigen</button>
   </p>
 </div>
 
