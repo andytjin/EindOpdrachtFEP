@@ -2,6 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {RouterModule, Routes} from "@angular/router";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //npm install firebase angularfire2 --save
 import {AngularFireModule} from "angularfire2";
 import {HardwareService} from "./hardware/hardware-service.service";
@@ -51,6 +52,7 @@ firebase.initializeApp(firebaseConfig);
     HardwareModule,
     ReserveringModule,
     AngularFireDatabaseModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
     )

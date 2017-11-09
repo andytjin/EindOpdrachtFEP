@@ -1,12 +1,1 @@
-<div class="popup" *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
-    <input type="file" class="custom" (change)="hardwareService.previewPictureOnChange($event)" accept=".jpg, .jpeg, .png" #fileinput/>
-    <img [src]="hardwareService.logo" alt="Voorbeeld afbeelding" height="100px" width="100px">
-    <br>
-    Naam<input #naam/><br>
-    <br>
-    Beschrijving<input  #beschrijving/><br>
-    <br>
-    <p *ngIf="!sending"><button class="btn"  (click)="cancel()">Cancel</button>
-    <button class="btn btn-primary"  (click)="saveHardware(naam.value, beschrijving.value,fileinput.files[0])">Toevoegen</button>
-    </p>
-</div>
+

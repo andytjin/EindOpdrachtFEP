@@ -14,6 +14,7 @@ import {ExemplaarOverzichtComponent} from "../exemplaar/exemplaar-overzicht/exem
 import {ExemplaarToevoegenComponent} from "../exemplaar/exemplaar-toevoegen/exemplaar-toevoegen.component";
 import {ExemplaarWijzigenComponent} from "../exemplaar/exemplaar-wijzigen/exemplaar-wijzigen.component";
 import {ReserveringModule} from "../reserveren/reservering.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 const appRoutes: Routes = [
   {path: 'hardwareOverzicht', component: HardwareOverzichtComponent, children:[
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ExemplaarModule,
     ReserveringModule,
+    NgbModule,
     RouterModule.forChild(
       appRoutes
     )
