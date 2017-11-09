@@ -30,7 +30,7 @@
             {{reservering.payload.val().terugbrengdatum}}
           </td>
           <td>{{reservering.payload.val().status}}</td>
-          <td><input type="button" (click)="updateToNextStatus(reservering.key, reservering.payload.val().status)" value="Update" *ngIf="reservering.payload.val().status != 'GEANNULEERD' && reservering.payload.val().status != 'AFGEROND'"/></td>
+          <td><input type="button" class="btn" (click)="updateToNextStatus(reservering.key, reservering.payload.val().status)" value="Update" *ngIf="reservering.payload.val().status != 'GEANNULEERD' && reservering.payload.val().status != 'AFGEROND'"/></td>
         </tr>
         </tbody>
       </table>
@@ -58,7 +58,7 @@
         <td>{{reservering.status}}</td>
         <td>{{reservering.terugbrengdatum}}</td>
         <td><span *ngIf="reservering.status == 'IN BEHANDELING' || reservering.status == 'STAAT KLAAR'; then in_progress else elseCase"></span></td>
-        <ng-template #in_progress><input type="button" (click)="annuleerReservering(reservering.id)" value="Annuleer Reservering"></ng-template>
+        <ng-template #in_progress><input type="button" class="btn" (click)="annuleerReservering(reservering.id)" value="Annuleer Reservering"></ng-template>
         <ng-template #elseCase>Kan niet geannuleerd worden</ng-template>
       </tr>
       </tbody>

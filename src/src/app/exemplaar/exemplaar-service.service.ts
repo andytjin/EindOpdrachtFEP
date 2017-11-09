@@ -55,6 +55,13 @@ export class ExemplaarService {
       status: status
     });
   }
+  wijzigExemplaarStatus(key: any, status: string) {
+    var exemplaar = this.af.object('Exemplaar/' + key);
+    exemplaar.update({
+      status: status
+    });
+  }
+
 
 //Retrieves an exemplaar by ID, waits for a callback that returns Exemplaar object once fillet with the action attributes.
   getExemplaar(key: any, callback) {

@@ -52,9 +52,8 @@
           <td>{{hardware.beschrijving}}</td>
           <td>{{hardware.aantal}}</td>
           <td><span *ngIf="hardware.aantal > 0; then voorraad else geen_voorraad"></span></td>
-          <ng-template #voorraad><a
-            [routerLink]="['',{ outlets: { popup: ['reserveringAanmelden', hardware.id, hardware.aantal] } }]">Reserveer
-            Mij</a></ng-template>
+          <ng-template #voorraad><input type="button" class="btn"
+            [routerLink]="['',{ outlets: { popup: ['reserveringAanmelden', hardware.id, hardware.aantal] } }]" value="Reserveer Mij"></ng-template>
           <ng-template #geen_voorraad>Geen Voorraad</ng-template>
         </tr>
         </tbody>

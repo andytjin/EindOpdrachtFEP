@@ -18,6 +18,7 @@ export class ReserveringAanmeldenComponent implements OnInit {
   hardwareService: any;
   reserveringService: ReserveringService;
   hardwareInformation: Observable<any>;
+  hardwareNaam: string;
 
   constructor(private route: ActivatedRoute, public hardwareservice: HardwareService, public resService: ReserveringService, private router: Router) {
     this.hardwareService = hardwareservice;
@@ -32,6 +33,8 @@ export class ReserveringAanmeldenComponent implements OnInit {
       // In a real app: dispatch action to load the details here.
       this.hardwareInformation = this.hardwareService.getHardware(this.id);
       this.getPicture(this.id);
+      this.hardwareservice.getHardwareName(this.id, (hwName) => {
+        this.hardwareNaam = hwName});
     });
   }
 
@@ -64,7 +67,11 @@ export class ReserveringAanmeldenComponent implements OnInit {
 
     } else {
       let username = this.reserveringService.getSessionUser();
-      this.reserveringService.requestReservering(username, this.id, 'asdasd' ,aantal.toString());
+      let hardwareName;
+
+
+
+      this.reserveringService.requestReservering(username, this.id, this.hardwareNaam ,aantal.toString());
       alert('Hardware is gereserveerd');
       this.closePopup();
     }

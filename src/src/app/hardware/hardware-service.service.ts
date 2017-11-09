@@ -120,6 +120,13 @@ export class HardwareService {
     return this.as.getSessionUserType();
   }
 
+  getHardwareName(key:string,callback){
+    var hwNaam;
+    this.af.object('Hardware/' + key).snapshotChanges().subscribe(action => {
+       hwNaam = action.payload.val().naam;
+      callback(hwNaam);
+    });
+  }
 
 }
 

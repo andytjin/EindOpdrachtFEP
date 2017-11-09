@@ -6,6 +6,7 @@ import {AuthenticationService} from "../authenticate/authentication.service";
 import {HardwareService} from "../hardware/hardware-service.service";
 import {Reservering} from "../shared/Reservering";
 import {ReserveringEnum} from "../shared/ReserveringEnum";
+import {ExemplaarService} from "../exemplaar/exemplaar-service.service";
 
 
 @Injectable()
@@ -13,20 +14,21 @@ export class ReserveringService {
 
   beheerderReserveringList: Observable<any[]>;
   hardwareService: any;
+  exemplaarService:any;
 
-  constructor(public af: AngularFireDatabase, private as: AuthenticationService, private hs: HardwareService) {
+  constructor(public af: AngularFireDatabase, private as: AuthenticationService, private hs: HardwareService, private es:ExemplaarService) {
     this.beheerderReserveringList = this.af.list('Reservering/').snapshotChanges();
     this.hardwareService = hs;
+    this.exemplaarService= es;
   }
 
-  updateReservering(key: string, status: string) {
+  updateReservering(key: string, status: string,) {
     var reservering = this.af.object('Reservering/' + key);
     if (status == ReserveringEnum.OPGEHAALD) {
       reservering.update({
         status: status,
         terugbrengdatum: this.terugBrengDatum()
       });
-      //TODO MAIL MOET HIER RIK
     } else {
       reservering.update({
         status: status
@@ -73,7 +75,7 @@ export class ReserveringService {
   terugBrengDatum() {
     var currentDate = new Date();
     var day = currentDate.getDate() + 7;
-    var month = currentDate.getMonth();
+    var month = currentDate.getMonth()+ 1;
     var year = currentDate.getFullYear();
     return ("" + (day + "/" + month + "/" + year));
   }
