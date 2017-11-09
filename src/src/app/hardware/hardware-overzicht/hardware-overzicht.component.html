@@ -1,62 +1,65 @@
 <div class="overzicht">
-<h2>Hardware overzicht</h2>
-<div *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
-<a [routerLink]="['',{ outlets: { popup: ['hardwareToevoegen'] } }]">Create</a>
-
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-      <tr>
-    <th>Naam</th>
-    <th>Beschrijving</th>
-        <th>Details</th>
-    <th>Verwijder Hardware</th>
-      </tr>
-      </thead>
-    </table>
+  <h2>Hardware overzicht</h2>
+  <div *ngIf="hardwareService.getSessionUserType() == 'medewerker'">
+    <input type="button" class="btn btn-primary" [routerLink]="['',{ outlets: { popup: ['hardwareToevoegen'] } }]"
+           value="Nieuwe Hardware">
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Beschrijving</th>
+          <th>Details</th>
+          <th>Verwijder Hardware</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let hardware of hardwareService.hardwareList | async">
+          <td>{{hardware.payload.val().naam}}</td>
+          <td>{{hardware.payload.val().beschrijving}}</td>
+          <td>
+            <a [routerLink]="['',{ outlets: { popup: ['hardwareWijzigen', hardware.payload.key] } }]">Hardware
+              Details</a>
+          </td>
+          <td><input class="btn" type="button" (click)="deleteHardware(hardware.payload.key)" value="Verwijder"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tbody>
-  <tr *ngFor="let hardware of hardwareService.hardwareList | async">
-    <td>{{hardware.payload.val().naam}}</td>
-    <td>{{hardware.payload.val().beschrijving}}</td>
-    <td >
-      <a [routerLink]="['',{ outlets: { popup: ['hardwareWijzigen', hardware.payload.key] } }]">Hardware Details</a>
-    </td>
-    <td><input type="button" (click)="deleteHardware(hardware.payload.key)" src="https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiTlajdwZ3XAhVM6qQKHaDGAv0QjRwIBw&url=http%3A%2F%2Fwww.pvhc.net%2FSmall-Delete-Icon20tsezejah%2F&psig=AOvVaw30sfsJl47WItCh2G0W4gPA&ust=1509630410688876" alt="Delete" width="48" height="48" value="Verwijder"></td>
-  </tr>
-      </tbody>
-    </table>
+  <div *ngIf="hardwareService.getSessionUserType() == 'student'">
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Beschrijving</th>
+          <th>Voorraad</th>
+          <th></th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let hardware of studentMap">
+          <td>{{hardware.naam}}</td>
+          <td>{{hardware.beschrijving}}</td>
+          <td>{{hardware.aantal}}</td>
+          <td><span *ngIf="hardware.aantal > 0; then voorraad else geen_voorraad"></span></td>
+          <ng-template #voorraad><a
+            [routerLink]="['',{ outlets: { popup: ['reserveringAanmelden', hardware.id, hardware.aantal] } }]">Reserveer
+            Mij</a></ng-template>
+          <ng-template #geen_voorraad>Geen Voorraad</ng-template>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<div *ngIf="hardwareService.getSessionUserType() == 'student'">
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-    <tr>
-      <th>Naam</th>
-      <th>Beschrijving</th>
-      <th>Voorraad</th>
-      <th></th>
-    </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tbody>
-    <tr *ngFor="let hardware of studentMap">
-      <td>{{hardware.naam}}</td>
-      <td>{{hardware.beschrijving}}</td>
-      <td>{{hardware.aantal}}</td>
-      <td><span *ngIf="hardware.aantal > 0; then voorraad else geen_voorraad"></span></td>
-      <ng-template #voorraad><a [routerLink]="['',{ outlets: { popup: ['reserveringAanmelden', hardware.id, hardware.aantal] } }]">Reserveer Mij</a></ng-template>
-      <ng-template #geen_voorraad>Geen Voorraad</ng-template>
-    </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<router-outlet name="popup"></router-outlet>
+  <router-outlet name="popup"></router-outlet>
 </div>

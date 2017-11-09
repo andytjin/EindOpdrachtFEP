@@ -1,28 +1,31 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!--https://codepen.io/colorlib/pen/rxddKy-->
 <div class="login-page" *ngIf="getSessionUserType() == 'none'">
-<app-authentication id="login"></app-authentication>
+  <app-authentication id="login"></app-authentication>
 </div>
 <span *ngIf="getSessionUserType() != 'none' ">
-  <div class="navigationMenu">
-    <span *ngIf="getSessionUserType() != 'none'">
-      <table>
-
-        <th><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]">Hardware Overzicht</a></th>
-        <th><a [routerLink]="[{ outlets: { overzicht: ['reserveringOverzicht'] } }]">Reservering Overzicht</a></th>
-        <th><input type="button" id="logout-button" (click)="logout()" value="Logout"></th>
-
-      </table>
-    </span>
-    <span *ngIf="getSessionUserType() == 'medewerker'"></span>
-  </div>
-  <div id="logout">
-   <h4 class="style">Welcome {{getSessionUser()}}</h4>
-    </div>
   <div style="text-align:center">
+    <a id="logout">Welcome {{getSessionUser()}}</a>
   <img class="logo" width="300"
        src="https://www.hu.nl/includes/img/HU-Platform/hu-logo-nl.svg">
+
   </div>
+
+    <span *ngIf="getSessionUserType() == 'medewerker'">
+      <ul class="nav">
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]">Hardware Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['reserveringOverzicht'] } }]">Reservering Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="logout()">Logout</a></li>
+      </ul>
+    </span>
+    <span *ngIf="getSessionUserType() == 'student'">
+      <ul class="nav">
+        <li><a [routerLink]="[{ outlets: { overzicht: ['reserveringOverzicht'] } }]">Reservering Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]">Hardware Overzicht</a></li>
+        <li><a [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="logout()">Logout</a></li>
+      </ul>
+    </span>
+    <span *ngIf="getSessionUserType() == 'medewerker'"></span>
   <router-outlet name="overzicht"></router-outlet>
   <router-outlet name="popup"></router-outlet>
 <br>

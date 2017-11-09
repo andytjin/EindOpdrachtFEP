@@ -8,7 +8,7 @@
   Password <input  #Password placeholder="password" type="password"/><br>
   <br>
 <p>
-  <button type="button" (click)="authenticate(Username.value, Password.value)">Login</button>
+  <button type="button" [routerLink]="[{ outlets: { overzicht: ['hardwareOverzicht'] } }]" (click)="authenticate(Username.value, Password.value)">Login</button>
 </p>
   </form>
 </div>
